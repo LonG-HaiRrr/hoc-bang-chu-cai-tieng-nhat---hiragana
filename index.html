@@ -10,21 +10,28 @@
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    background-image: url('longhair.png');
+    background-size: cover; /* Đảm bảo ảnh phủ toàn bộ background */
+    background-position: center; /* Căn giữa ảnh */
+    background-repeat: no-repeat; /* Không lặp lại ảnh */
   }
   #controls {
     padding: 10px;
-    background: #f4f4f4;
+    background: rgba(75, 89, 139, 0.94)
   }
   input[type="text"] {
     width: 100px;
     padding: 5px;
     margin-right: 10px;
+    
   }
   #flashcards {
     position: relative;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 48px);
     overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+
   }
   .card {
     width: 120px;
@@ -59,19 +66,23 @@
     font-size: 40px;
   }
   .front {
-    background: #e0f7fa;
+    background: #138897;
   }
   .back {
-    background: #ffe0b2;
+    background: #bf7b15;
     transform: rotateY(180deg);
     font-size: 24px;
   }
+  #controls label {
+  color: yellow; /* Hoặc bất kỳ màu nào bạn muốn */
+  font-weight: bold; /* Nếu muốn chữ đậm */
+}
 </style>
 </head>
 <body>
 <div id="controls">
-  <label>Chữ bắt đầu: <input id="startChar" type="text" maxlength="1" value="あ" /></label>
-  <label>Chữ kết thúc: <input id="endChar" type="text" maxlength="1" value="ん" /></label>
+  <label>Chữ bắt đầu: <input id="startChar" type="text"maxlength="3" value="a" /></label>
+  <label>Chữ kết thúc: <input id="endChar" type="text" maxlength="3" value="n" /></label>
   <button id="generateBtn">Tạo flashcards</button>
 </div>
 <div id="flashcards"></div>
@@ -91,9 +102,12 @@
     {char: 'わ', reading: 'wa'}, {char: 'を', reading: 'wo'}, {char: 'ん', reading: 'n'}
   ];
 
-  function getCharIndex(c) {
-    return hiraganaList.findIndex(item => item.char === c);
-  }
+    function getCharIndex(input) {
+  // Cho phép nhập cả Hiragana hoặc Romaji (Latin)
+  return hiraganaList.findIndex(item => 
+    item.char === input || item.reading.toLowerCase() === input.toLowerCase()
+  );
+}
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
