@@ -4,17 +4,35 @@
 <meta charset="UTF-8" />
 <title>Flashcard Bảng Chữ Cái Tiếng Nhật</title>
 <style>
-  body {
+body {
     font-family: Arial, sans-serif;
     position: relative;
     height: 100vh;
     margin: 0;
     overflow: hidden;
     background-image: url('1.png');
-    background-size: cover; /* Đảm bảo ảnh phủ toàn bộ background */
-    background-position: center; /* Căn giữa ảnh */
-    background-repeat: no-repeat; /* Không lặp lại ảnh */
-  }
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.551); /* Lớp màu đen với opacity 0.9 */
+    pointer-events: none; /* Cho phép các thao tác chuột đi qua lớp này */
+    z-index: 1;
+}
+
+body > * {
+    position: relative;
+    z-index: 2; /* Đảm bảo nội dung trong body nằm trên lớp màu đen */
+}
+
   #controls {
     padding: 10px;
     background: rgba(75, 89, 139, 0.94)
@@ -30,7 +48,7 @@
     width: 100% !important;
     height: calc(100vh - 48px);
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0);
 
   }
   .card {
