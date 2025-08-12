@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<title>Flashcard Bảng Chữ Cái Tiếng Nhật</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    position: relative;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+  #controls {
+    padding: 10px;
+    background: #f4f4f4;
+  }
+  input[type="text"] {
+    width: 100px;
+    padding: 5px;
+    margin-right: 10px;
+  }
+  #flashcards {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+  }
+  .card {
+    width: 120px;
+    height: 160px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    position: absolute;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  .inner-card {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+  }
+  .card.flipped .inner-card {
+    transform: rotateY(180deg);
+  }
+  .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+  }
+  .front {
+    background: #e0f7fa;
+  }
+  .back {
+    background: #ffe0b2;
+    transform: rotateY(180deg);
+    font-size: 24px;
+  }
+</style>
+</head>
+<body>
+<div id="controls">
+  <label>Chữ bắt đầu: <input id="startChar" type="text" maxlength="1" value="あ" /></label>
+  <label>Chữ kết thúc: <input id="endChar" type="text" maxlength="1" value="ん" /></label>
+  <button id="generateBtn">Tạo flashcards</button>
+</div>
+<div id="flashcards"></div>
+
+<script>
+  // Bảng chữ cái tiếng Nhật Hiragana (chữ và cách đọc tương ứng)
+  const hiraganaList = [
+    {char: 'あ', reading: 'a'}, {char: 'い', reading: 'i'}, {char: 'う', reading: 'u'}, {char: 'え', reading: 'e'}, {char: 'お', reading: 'o'},
+    {char: 'か', reading: 'ka'}, {char: 'き', reading: 'ki'}, {char: 'く', reading: 'ku'}, {char: 'け', reading: 'ke'}, {char: 'こ', reading: 'ko'},
+    {char: 'さ', reading: 'sa'}, {char: 'し', reading: 'shi'}, {char: 'す', reading: 'su'}, {char: 'せ', reading: 'se'}, {char: 'そ', reading: 'so'},
+    {char: 'た', reading: 'ta'}, {char: 'ち', reading: 'chi'}, {char: 'つ', reading: 'tsu'}, {char: 'て', reading: 'te'}, {char: 'と', reading: 'to'},
+    {char: 'な', reading: 'na'}, {char: 'に', reading: 'ni'}, {char: 'ぬ', reading: 'nu'}, {char: 'ね', reading: 'ne'}, {char: 'の', reading: 'no'},
+    {char: 'は', reading: 'ha'}, {char: 'ひ', reading: 'hi'}, {char: 'ふ', reading: 'fu'}, {char: 'へ', reading: 'he'}, {char: 'ほ', reading: 'ho'},
+    {char: 'ま', reading: 'ma'}, {char: 'み', reading: 'mi'}, {char: 'む', reading: 'mu'}, {char: 'め', reading: 'me'}, {char: 'も', reading: 'mo'},
+    {char: 'や', reading: 'ya'}, {char: 'ゆ', reading: 'yu'}, {char: 'よ', reading: 'yo'},
+    {char: 'ら', reading: 'ra'}, {char: 'り', reading: 'ri'}, {char: 'る', reading: 'ru'}, {char: 'れ', reading: 're'}, {char: 'ろ', reading: 'ro'},
+    {char: 'わ', reading: 'wa'}, {char: 'を', reading: 'wo'}, {char: 'ん', reading: 'n'}
+  ];
+
+  function getCharIndex(c) {
+    return hiraganaList.findIndex(item => item.char === c);
+  }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function createFlashcards(startChar, endChar) {
+    const flashcardsDiv = document.getElementById('flashcards');
+    flashcardsDiv.innerHTML = '';
+
+    const startIdx = getCharIndex(startChar);
+    const endIdx = getCharIndex(endChar);
+    if (startIdx === -1 || endIdx === -1 || startIdx > endIdx) {
+      alert("Chữ bắt đầu hoặc chữ kết thúc không hợp lệ hoặc thứ tự sai.");
+      return;
+    }
+
+    // Lấy mảng chữ cần dùng
+    let cardsToShow = hiraganaList.slice(startIdx, endIdx + 1);
+
+    // Shuffle mảng để hiện vị trí ngẫu nhiên
+    shuffleArray(cardsToShow);
+
+    // Kích thước vùng flashcards
+    const maxWidth = flashcardsDiv.clientWidth;
+    const maxHeight = flashcardsDiv.clientHeight;
+    const cardWidth = 120;
+    const cardHeight = 160;
+
+    cardsToShow.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      // Random vị trí trong vùng flashcards
+      const x = Math.random() * (maxWidth - cardWidth);
+      const y = Math.random() * (maxHeight - cardHeight);
+
+      card.style.left = `${x}px`;
+      card.style.top = `${y}px`;
+
+      // Tạo inner card
+      const inner = document.createElement('div');
+      inner.className = 'inner-card';
+
+      // Mặt trước: chữ tiếng Nhật (ảnh có thể thay vào đây, tạm dùng chữ)
+      const front = document.createElement('div');
+      front.className = 'face front';
+      front.textContent = item.char;
+
+      // Mặt sau: cách đọc
+      const back = document.createElement('div');
+      back.className = 'face back';
+      back.textContent = item.reading;
+
+      inner.appendChild(front);
+      inner.appendChild(back);
+      card.appendChild(inner);
+
+      // Khi nhấn, quay thẻ
+      card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+      });
+
+      flashcardsDiv.appendChild(card);
+    });
+  }
+
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    const startChar = document.getElementById('startChar').value.trim();
+    const endChar = document.getElementById('endChar').value.trim();
+    createFlashcards(startChar, endChar);
+  });
+
+  // Tạo flashcards lần đầu với giá trị mặc định
+  createFlashcards('あ', 'ん');
+</script>
+</body>
+</html>
