@@ -35,6 +35,7 @@
     position: absolute;
     perspective: 1000px;
     cursor: pointer;
+    transition: opacity 0.5s ease;
   }
   .inner-card {
     width: 100%;
@@ -76,7 +77,7 @@
 <div id="flashcards"></div>
 
 <script>
-  // Bảng chữ cái tiếng Nhật Hiragana (chữ và cách đọc tương ứng)
+  // Danh sách Hiragana
   const hiraganaList = [
     {char: 'あ', reading: 'a'}, {char: 'い', reading: 'i'}, {char: 'う', reading: 'u'}, {char: 'え', reading: 'e'}, {char: 'お', reading: 'o'},
     {char: 'か', reading: 'ka'}, {char: 'き', reading: 'ki'}, {char: 'く', reading: 'ku'}, {char: 'け', reading: 'ke'}, {char: 'こ', reading: 'ko'},
@@ -96,7 +97,7 @@
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
   }
@@ -112,13 +113,10 @@
       return;
     }
 
-    // Lấy mảng chữ cần dùng
+    // Lấy danh sách cần hiển thị và trộn
     let cardsToShow = hiraganaList.slice(startIdx, endIdx + 1);
-
-    // Shuffle mảng để hiện vị trí ngẫu nhiên
     shuffleArray(cardsToShow);
 
-    // Kích thước vùng flashcards
     const maxWidth = flashcardsDiv.clientWidth;
     const maxHeight = flashcardsDiv.clientHeight;
     const cardWidth = 120;
@@ -128,23 +126,22 @@
       const card = document.createElement('div');
       card.className = 'card';
 
-      // Random vị trí trong vùng flashcards
+      // Random vị trí
       const x = Math.random() * (maxWidth - cardWidth);
       const y = Math.random() * (maxHeight - cardHeight);
-
       card.style.left = `${x}px`;
       card.style.top = `${y}px`;
 
-      // Tạo inner card
+      // Inner card
       const inner = document.createElement('div');
       inner.className = 'inner-card';
 
-      // Mặt trước: chữ tiếng Nhật (ảnh có thể thay vào đây, tạm dùng chữ)
+      // Mặt trước
       const front = document.createElement('div');
       front.className = 'face front';
       front.textContent = item.char;
 
-      // Mặt sau: cách đọc
+      // Mặt sau
       const back = document.createElement('div');
       back.className = 'face back';
       back.textContent = item.reading;
@@ -153,22 +150,44 @@
       inner.appendChild(back);
       card.appendChild(inner);
 
-      // Khi nhấn, quay thẻ
+      // Logic đếm click + ẩn sau 3 giây
+      let clickCount = 0;
+      let hideTimer = null;
+
       card.addEventListener('click', () => {
+        clickCount++;
         card.classList.toggle('flipped');
+
+        if (clickCount % 2 === 1) { 
+          // Lật sang mặt sau
+          if (hideTimer) clearTimeout(hideTimer);
+          hideTimer = setTimeout(() => {
+            if (clickCount % 2 === 1) { // Vẫn ở mặt sau
+              card.style.opacity = "0";
+              setTimeout(() => card.remove(), 500);
+            }
+          }, 3000);
+        } else {
+          // Lật lại mặt trước -> hủy timer
+          if (hideTimer) {
+            clearTimeout(hideTimer);
+            hideTimer = null;
+          }
+        }
       });
 
       flashcardsDiv.appendChild(card);
     });
   }
 
+  // Nút tạo Flashcards
   document.getElementById('generateBtn').addEventListener('click', () => {
     const startChar = document.getElementById('startChar').value.trim();
     const endChar = document.getElementById('endChar').value.trim();
     createFlashcards(startChar, endChar);
   });
 
-  // Tạo flashcards lần đầu với giá trị mặc định
+  // Load mặc định
   createFlashcards('あ', 'ん');
 </script>
 </body>
