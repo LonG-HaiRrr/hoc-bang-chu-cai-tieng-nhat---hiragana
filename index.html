@@ -77,6 +77,20 @@
   color: yellow; /* Hoặc bất kỳ màu nào bạn muốn */
   font-weight: bold; /* Nếu muốn chữ đậm */
 }
+
+/* Media Query cho màn hình nhỏ hơn 1000px */
+@media (max-width: 1000px) {
+  #controls {
+    transform: scale(1.1);       /* Phóng to 150% */
+    transform-origin: top left;  /* Giữ điểm neo phía trên bên trái */
+    padding: 20px;
+  }
+
+  /* Đảm bảo không bị tràn ngang */
+  body {
+    overflow-x: hidden;
+  }
+}
 </style>
 </head>
 <body>
