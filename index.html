@@ -77,7 +77,17 @@
   color: yellow; /* Hoặc bất kỳ màu nào bạn muốn */
   font-weight: bold; /* Nếu muốn chữ đậm */
 }
-
+#generateBtn {
+    background-color: turquoise;
+    cursor: pointer;
+    font-weight: 200;
+    border-radius: 30px;
+    height: 50px;
+    width: 130px;
+}
+#generateBtn:hover{
+    background-color: #bf7b15;
+}
 /* Media Query cho màn hình nhỏ hơn 1000px */
 @media (max-width: 1000px) {
   #controls {
@@ -89,14 +99,16 @@
   /* Đảm bảo không bị tràn ngang */
   body {
     overflow-x: hidden;
+    font-weight: 300;
+    font-size: 10px;
   }
 }
 </style>
 </head>
 <body>
 <div id="controls">
-  <label>Chữ bắt đầu: <input id="startChar" type="text"maxlength="3" value="a" /></label>
-  <label>Chữ kết thúc: <input id="endChar" type="text" maxlength="3" value="n" /></label>
+  <label>Chữ bắt đầu: <input id="startChar" type="text"maxlength="3" value="a" style="font-weight: 300;font-size: 19px;" /></label>
+  <label>Chữ kết thúc: <input id="endChar" type="text" maxlength="3" value="n" style="font-weight: 300;font-size: 19px;" /></label>
   <button id="generateBtn">Tạo flashcards</button>
 </div>
 <div id="flashcards"></div>
