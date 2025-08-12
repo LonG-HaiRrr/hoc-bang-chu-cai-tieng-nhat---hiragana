@@ -154,27 +154,68 @@
       let clickCount = 0;
       let hideTimer = null;
 
-      card.addEventListener('click', () => {
-        clickCount++;
-        card.classList.toggle('flipped');
+card.addEventListener('click', () => {
+  clickCount++;
+  card.classList.toggle('flipped');
 
-        if (clickCount % 2 === 1) { 
-          // Lật sang mặt sau
-          if (hideTimer) clearTimeout(hideTimer);
-          hideTimer = setTimeout(() => {
-            if (clickCount % 2 === 1) { // Vẫn ở mặt sau
-              card.style.opacity = "0";
-              setTimeout(() => card.remove(), 500);
-            }
-          }, 3000);
-        } else {
-          // Lật lại mặt trước -> hủy timer
-          if (hideTimer) {
-            clearTimeout(hideTimer);
-            hideTimer = null;
-          }
-        }
-      });
+  // Nếu đang ở mặt sau (số lần click lẻ)
+  if (clickCount % 2 === 1) {
+    // Nếu đã có timer thì xóa
+    if (hideTimer) clearTimeout(hideTimer);
+
+    // Tạo hoặc hiện đồng hồ đếm ngược ở góc phải
+    let timerLabel = card.querySelector('.timer-label');
+    if (!timerLabel) {
+      timerLabel = document.createElement('div');
+      timerLabel.className = 'timer-label';
+      timerLabel.style.position = 'absolute';
+      timerLabel.style.top = '5px';
+      timerLabel.style.right = '5px';
+      timerLabel.style.background = 'rgba(0,0,0,0.7)';
+      timerLabel.style.color = '#fff';
+      timerLabel.style.padding = '2px 6px';
+      timerLabel.style.borderRadius = '4px';
+      timerLabel.style.fontSize = '14px';
+      timerLabel.style.zIndex = '2';
+      card.appendChild(timerLabel);
+    }
+
+    let countdown = 3;
+    timerLabel.textContent = countdown;
+
+    // Cập nhật mỗi giây
+    const updateCountdown = () => {
+      countdown--;
+      if (countdown >= 0) {
+        timerLabel.textContent = countdown;
+      }
+    };
+
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Sau 3 giây sẽ ẩn thẻ nếu vẫn ở mặt sau
+    hideTimer = setTimeout(() => {
+      clearInterval(countdownInterval); // Ngừng đếm
+      if (clickCount % 2 === 1) {
+        card.style.opacity = "0";
+        setTimeout(() => card.remove(), 500);
+      } else {
+        // Nếu đã lật lại trước khi hết thời gian => ẩn label
+        if (timerLabel) timerLabel.remove();
+      }
+    }, 3000);
+
+  } else {
+    // Nếu lật lại mặt trước -> hủy timer + xóa đồng hồ
+    if (hideTimer) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+    const existingLabel = card.querySelector('.timer-label');
+    if (existingLabel) existingLabel.remove();
+  }
+});
+
 
       flashcardsDiv.appendChild(card);
     });
