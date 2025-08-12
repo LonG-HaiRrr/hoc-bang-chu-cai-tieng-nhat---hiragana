@@ -182,8 +182,10 @@
       card.className = 'card';
 
       // Random vị trí
-      const x = Math.random() * (maxWidth - cardWidth);
-      const y = Math.random() * (maxHeight - cardHeight);
+// Random với khoảng giới hạn
+const padding = 0; // có thể đổi thành vài pixel nếu muốn cách mép
+const x = Math.random() * (maxWidth - cardWidth - padding * 2) + padding;
+const y = Math.random() * (maxHeight - cardHeight - padding * 2) + padding;
       card.style.left = `${x}px`;
       card.style.top = `${y}px`;
 
