@@ -205,7 +205,7 @@
       }
     } else {
         for (let i = 1; i <= tongnen_nhatban; i++) {
-      backgrounds.push(`p${i}.png`);
+      backgrounds.push(`x${i}.png`);
       }
     }
     return backgrounds;
