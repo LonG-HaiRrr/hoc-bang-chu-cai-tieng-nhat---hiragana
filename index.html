@@ -426,12 +426,12 @@ let styleMode = false; // false = bộ 1, true = bộ 2
 function getBackgroundList() {
   const backgrounds = [];
   if (styleMode) {
-    for (let i = 1; i <= tongnen_nhatban; i++) {
-      backgrounds.push(`p${i}.png`);
-    }
-  } else {
     for (let i = 1; i <= tongnen_girl; i++) {
       backgrounds.push(`${i}.png`);
+    }
+  } else {
+      for (let i = 1; i <= tongnen_nhatban; i++) {
+    backgrounds.push(`p${i}.png`);
     }
   }
   return backgrounds;
