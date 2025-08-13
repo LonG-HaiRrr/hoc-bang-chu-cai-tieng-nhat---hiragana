@@ -295,7 +295,11 @@ card.addEventListener('click', () => {
       clearInterval(countdownInterval); // Ngừng đếm
       if (clickCount % 2 === 1) {
         card.style.opacity = "0";
-        setTimeout(() => card.remove(), 500);
+        setTimeout(() => {
+          card.remove();
+          checkCardsAndChangeBackground(); // gọi hàm kiểm tra và đổi nền
+        }, 500);
+
       } else {
         // Nếu đã lật lại trước khi hết thời gian => ẩn label
         if (timerLabel) timerLabel.remove();
@@ -324,6 +328,23 @@ card.addEventListener('click', () => {
     const endChar = document.getElementById('endChar').value.trim();
     createFlashcards(startChar, endChar);
   });
+  // Danh sách các file nền
+const backgrounds = ['2.png', '3.png', '4.png', '5.png', '6.png'];
+let currentBgIndex = 0;
+
+// Đổi nền tiếp theo
+function changeBackground() {
+  currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
+  document.body.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
+}
+
+// Kiểm tra nếu còn card không
+function checkCardsAndChangeBackground() {
+  const flashcardsDiv = document.getElementById('flashcards');
+  if (flashcardsDiv.children.length === 0) {
+    changeBackground();
+  }
+}
 
   // Load mặc định
   createFlashcards('あ', 'ん');
