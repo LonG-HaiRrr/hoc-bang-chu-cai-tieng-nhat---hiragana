@@ -217,20 +217,23 @@ const cardWidth = 120;
 const cardHeight = 160;
 const padding = 10;
 
-    cardsToShow.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'card';
+cardsToShow.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    flashcardsDiv.appendChild(card); // Thêm trước để đo kích thước thật
 
-      // Random vị trí
-// Chỉ lấy khung tính được khi đủ rộng/cao:
-const allowedWidth = flashRect.width - cardWidth - padding * 2;
-const allowedHeight = flashRect.height - cardHeight - padding * 2;
+    const cardWidth = card.offsetWidth;
+    const cardHeight = card.offsetHeight;
 
-// Nếu vùng quá nhỏ, gán về 0
-const x = (allowedWidth > 0 ? Math.random() * allowedWidth : 0) + padding;
-const y = (allowedHeight > 0 ? Math.random() * allowedHeight : 0) + padding;
-card.style.left = `${x}px`;
-card.style.top = `${y}px`;
+    // Giới hạn vùng đặt card
+    const allowedWidth = flashRect.width - cardWidth - padding * 2;
+    const allowedHeight = flashRect.height - cardHeight - padding * 2;
+
+    const x = (allowedWidth > 0 ? Math.random() * allowedWidth : 0) + padding;
+    const y = (allowedHeight > 0 ? Math.random() * allowedHeight : 0) + padding;
+
+    card.style.left = `${x}px`;
+    card.style.top = `${y}px`;
 
       // Inner card
       const inner = document.createElement('div');
