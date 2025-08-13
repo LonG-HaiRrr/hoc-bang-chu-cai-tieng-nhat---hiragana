@@ -192,10 +192,10 @@
     // Danh sách các file nền
             // const backgrounds = ['2.png', '3.png', '4.png', '5.png', '6.png']; 
   // Giả sử bạn biết số ảnh tối đa sẽ là 200
-    const tongnen_girl = 28;
+    const tongnen_girl = 14;
     const tongnen_nhatban = 5;
-    const tongnen_lap_girl = 2;
-    const tongnen_lap_nhatban = 3;
+    const tongnen_lap_girl = 11;
+    const tongnen_lap_nhatban = 5;
 
   let styleMode = false; // false = bộ 1, true = bộ 2
 
