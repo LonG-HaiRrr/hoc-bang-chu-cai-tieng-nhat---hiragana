@@ -104,7 +104,7 @@
   // Lấy url ảnh nền kế tiếp
   const nextBgUrl = backgrounds[nextBgIndex];
   // Gán ảnh nền cho mặt trước
-  front.style.backgroundImage = `linear-gradient(rgba(24, 7, 155, 0.8), rgba(32, 1, 135, 0.72), rgba(111, 4, 4, 0.72), ), url('${nextBgUrl}')`;
+  front.style.backgroundImage = `linear-gradient(rgba(24, 7, 155, 0.8), rgba(32, 1, 135, 0.72), rgba(111, 4, 4, 0.72)), url('${nextBgUrl}')`;
 
   const back = document.createElement('div');
   back.className = 'face back';
@@ -264,7 +264,11 @@ function checkCardsAndChangeBackground() {
     styleMode = this.checked;
     backgrounds = getBackgroundList();
     changeBackground();
-    createFlashcards(startChar, endChar);
+      const startChar = document.getElementById('startChar').value.trim();
+  const endChar = document.getElementById('endChar').value.trim();
+
+  // Tạo lại flashcards với bộ ảnh mới
+  createFlashcards(startChar, endChar);
   });
 
 let isMobile = window.innerWidth <= 1000; // lưu chế độ ban đầu
