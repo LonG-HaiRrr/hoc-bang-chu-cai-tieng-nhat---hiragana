@@ -1,4 +1,230 @@
+  <!DOCTYPE html>
+  <html lang="vi">
+  <head>
+  <meta charset="UTF-8" />
+  <title>Flashcard Bảng Chữ Cái Tiếng Nhật</title>
+  <style>
+  body {
+      font-family: Arial, sans-serif;
+      position: relative;
+      /* height: 100vh; */
+      margin: 0;
+      overflow: hidden;
+      background-image: url('2.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+  }
 
+  body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 110%;
+      height: 110%;
+      background-color: rgba(0, 0, 0, 0.551); /* Lớp màu đen với opacity 0.9 */
+      pointer-events: none; /* Cho phép các thao tác chuột đi qua lớp này */
+      z-index: 1;
+  }
+
+  body > * {
+      position: relative;
+      z-index: 2; /* Đảm bảo nội dung trong body nằm trên lớp màu đen */
+  }
+
+    #controls {
+      padding: 10px;
+      background: rgba(75, 89, 139, 0.94)
+    }
+    input[type="text"] {
+      width: 100px;
+      padding: 5px;
+      margin-right: 10px;
+      
+    }
+    #flashcards {
+      position: relative;
+      width: 100% !important;
+      height: calc(100vh - 48px);
+      overflow: hidden;
+      background-color: rgba(0, 0, 0, 0);
+
+    }
+    .card {
+      width: 120px;
+      height: 160px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      position: absolute;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+    }
+    .inner-card {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .card.flipped .inner-card {
+      transform: rotateY(180deg);
+    }
+    .face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+    }
+    .front {
+      background: #022dbd;
+      color: #ffffff;
+      font-size: 50px;
+      font-weight: bold;
+    }
+    .back {
+      background: #bf7b15;
+      transform: rotateY(180deg);
+      font-size: 24px;
+    }
+    #controls label {
+    color: yellow; /* Hoặc bất kỳ màu nào bạn muốn */
+    font-weight: bold; /* Nếu muốn chữ đậm */
+    font-size: 19px;
+  }
+  #generateBtn {
+      background-color: turquoise;
+      cursor: pointer;
+      font-weight: 200;
+      border-radius: 30px;
+      height: 50px;
+      width: 130px;
+      color: #000;
+  }
+  #generateBtn:hover{
+      background-color: rgb(45, 152, 142);
+      color: white;
+        /* Hiệu ứng phát sáng */
+    box-shadow: 0 0 12px 15px rgba(59, 220, 204, 0.9);
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* Nút gạt Toggle */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    margin-left: 15px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: #4CAF50;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+
+
+  /* Media Query cho màn hình nhỏ hơn 1000px */
+  @media (max-width: 1000px) {
+    #controls {
+      transform: scale(1.1);       /* Phóng to 150% */
+      transform-origin: top left;  /* Giữ điểm neo phía trên bên trái */
+      padding: 10px;
+      background-color: #bf7b15;
+    }
+
+  html, body {
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  #flashcards {
+    min-height: 0;
+    height: 100%;
+    padding-bottom: 30px;
+    border-bottom: 30px;
+
+  }
+
+    .card {
+      height: 250px;
+      width: 180px;
+    }
+    #generateBtn {
+      background-color: turquoise;
+      color: #000;
+      font-size: 15px;
+      font-weight: bold;
+  }
+  #generateBtn:hover{
+      background-color: rgb(45, 152, 142);
+      color: white;
+  }
+    .front {
+      background: #022dbd;
+      color: #ffffff;
+      font-size: 90px;
+      font-weight: bold;
+    }
+    .back {
+      background: #bf7b15;
+      transform: rotateY(180deg);
+      font-size: 90px;
+    }
+  }
+  </style>
+  </head>
+  <body>
+  <div id="controls">
+    <label>Chữ bắt đầu: <input id="startChar" type="text"maxlength="3" value="a" style="font-weight: 300;font-size: 19px;" /></label>
+    <label>Chữ kết thúc: <input id="endChar" type="text" maxlength="3" value="n" style="font-weight: 300;font-size: 19px;" /></label>
+    <button id="generateBtn">Tạo flashcards</button>
+        <label class="switch"><input type="checkbox" id="styleToggle"><span class="slider"></span></label>
+  </div>
+  <div id="flashcards"></div>
+
+  <script>
     // Danh sách Hiragana
   const hiraganaList = [
     // Cơ bản (seion)
@@ -192,39 +418,22 @@
     // Danh sách các file nền
             // const backgrounds = ['2.png', '3.png', '4.png', '5.png', '6.png']; 
   // Giả sử bạn biết số ảnh tối đa sẽ là 200
-    const tongnen_girl = 15;
+    const tongnen_girl = 28;
     const tongnen_nhatban = 5;
-    const tongnen_lap_girl = 10;
-    const tongnen_lap_nhatban = 5;
 
   let styleMode = false; // false = bộ 1, true = bộ 2
 
   function getBackgroundList() {
     const backgrounds = [];
-    const chedo = getPadding();
-    if(chedo < 50){
-        if (styleMode) {
-        for (let i = 1; i <= tongnen_lap_girl; i++) {
-            backgrounds.push(`a${i}.png`);
-        }
-        } else {
-            for (let i = 1; i <= tongnen_lap_nhatban; i++) {
-        backgrounds.push(`b${i}.png`);
-        }
-        }
+    if (styleMode) {
+      for (let i = 1; i <= tongnen_girl; i++) {
+        backgrounds.push(`${i}.png`);
+      }
+    } else {
+        for (let i = 1; i <= tongnen_nhatban; i++) {
+      backgrounds.push(`p${i}.png`);
+      }
     }
-    else {
-        if (styleMode) {
-            for (let i = 1; i <= tongnen_girl; i++) {
-                backgrounds.push(`${i}.png`);
-            }
-            } else {
-                for (let i = 1; i <= tongnen_nhatban; i++) {
-            backgrounds.push(`x${i}.png`);
-            }
-            }
-    }
-
     return backgrounds;
   }
 
@@ -260,19 +469,9 @@ function checkCardsAndChangeBackground() {
     changeBackground();
   });
 
-let isMobile = window.innerWidth <= 1000; // lưu chế độ ban đầu
-
-window.addEventListener('resize', () => {
-  const nowMobile = window.innerWidth <= 1000;
-
-  // Chỉ chạy khi chuyển chế độ (mobile <-> desktop)
-  if (nowMobile !== isMobile) {
-    isMobile = nowMobile; // cập nhật trạng thái
-    backgrounds = getBackgroundList(); 
-    changeBackground();
-  }
-});
-
-
   // Gọi load flashcards lần đầu khi trang tải
   createFlashcards('あ', 'ん');
+
+  </script>
+  </body>
+  </html>
