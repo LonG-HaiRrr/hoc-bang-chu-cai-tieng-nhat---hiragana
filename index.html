@@ -330,13 +330,20 @@ card.addEventListener('click', () => {
   });
   // Danh sách các file nền
 const backgrounds = ['2.png', '3.png', '4.png', '5.png', '6.png'];
-let currentBgIndex = 0;
+let currentBgIndex = Math.floor(Math.random() * backgrounds.length);
+document.body.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
 
 // Đổi nền tiếp theo
 function changeBackground() {
-  currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
+  let newIndex;
+  do {
+    newIndex = Math.floor(Math.random() * backgrounds.length);
+  } while (newIndex === currentBgIndex); // Đảm bảo không lặp lại nền hiện tại
+
+  currentBgIndex = newIndex;
   document.body.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
 }
+
 
 // Kiểm tra nếu còn card không
 function checkCardsAndChangeBackground() {
