@@ -115,6 +115,52 @@ body > * {
   box-shadow: 0 0 12px 15px rgba(59, 220, 204, 0.9);
   transition: box-shadow 0.3s ease;
 }
+
+/* Nút gạt Toggle */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-left: 15px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+
 /* Media Query cho màn hình nhỏ hơn 1000px */
 @media (max-width: 1000px) {
   #controls {
@@ -165,6 +211,7 @@ body > * {
   <label>Chữ bắt đầu: <input id="startChar" type="text"maxlength="3" value="a" style="font-weight: 300;font-size: 19px;" /></label>
   <label>Chữ kết thúc: <input id="endChar" type="text" maxlength="3" value="n" style="font-weight: 300;font-size: 19px;" /></label>
   <button id="generateBtn">Tạo flashcards</button>
+      <label class="switch"><input type="checkbox" id="styleToggle"><span class="slider"></span></label>
 </div>
 <div id="flashcards"></div>
 
@@ -359,29 +406,38 @@ card.addEventListener('click', () => {
   // Danh sách các file nền
           // const backgrounds = ['2.png', '3.png', '4.png', '5.png', '6.png']; 
 // Giả sử bạn biết số ảnh tối đa sẽ là 200
-  const totalBackgrounds = 10;
+  const tongnen_girl = 28;
+  const tongnen_nhatban = 5;
+
+let styleMode = false; // false = bộ 1, true = bộ 2
+
+function getBackgroundList() {
   const backgrounds = [];
-  for (let i = 1; i <= totalBackgrounds; i++) {
-    backgrounds.push(`${i}.png`);
+  if (styleMode) {
+    for (let i = 1; i <= tongnen_nhatban; i++) {
+      backgrounds.push(`p${i}.png`);
+    }
+  } else {
+    for (let i = 1; i <= tongnen_girl; i++) {
+      backgrounds.push(`${i}.png`);
+    }
   }
-  let currentBgIndex = Math.floor(Math.random() * backgrounds.length);
-  document.body.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
+  return backgrounds;
+}
 
+let backgrounds = getBackgroundList();
+let currentBgIndex = Math.floor(Math.random() * backgrounds.length);
+document.body.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
 
-
-// Đổi nền tiếp theo
 function changeBackground() {
   let newIndex;
   do {
     newIndex = Math.floor(Math.random() * backgrounds.length);
-  } while (newIndex === currentBgIndex); // Đảm bảo không lặp lại nền hiện tại
-
+  } while (newIndex === currentBgIndex);
   currentBgIndex = newIndex;
   document.body.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
 }
 
-
-// Kiểm tra nếu còn card không
 function checkCardsAndChangeBackground() {
   const flashcardsDiv = document.getElementById('flashcards');
   if (flashcardsDiv.children.length === 0) {
@@ -389,8 +445,15 @@ function checkCardsAndChangeBackground() {
   }
 }
 
-  // Load mặc định
-  createFlashcards('あ', 'ん');
+document.getElementById('styleToggle').addEventListener('change', function () {
+  styleMode = this.checked;
+  backgrounds = getBackgroundList();
+  changeBackground();
+});
+
+// Gọi load flashcards lần đầu khi trang tải
+createFlashcards('あ', 'ん');
+
 </script>
 </body>
 </html>
