@@ -194,20 +194,37 @@
   // Giả sử bạn biết số ảnh tối đa sẽ là 200
     const tongnen_girl = 28;
     const tongnen_nhatban = 5;
+    const tongnen_lap_girl = 2;
+    const tongnen_lap_nhatban = 3;
 
   let styleMode = false; // false = bộ 1, true = bộ 2
 
   function getBackgroundList() {
     const backgrounds = [];
-    if (styleMode) {
-      for (let i = 1; i <= tongnen_girl; i++) {
-        backgrounds.push(`${i}.png`);
-      }
-    } else {
-        for (let i = 1; i <= tongnen_nhatban; i++) {
-      backgrounds.push(`x${i}.png`);
-      }
+    const chedo = getPadding();
+    if(chedo < 50){
+        if (styleMode) {
+        for (let i = 1; i <= tongnen_lap_girl; i++) {
+            backgrounds.push(`a${i}.png`);
+        }
+        } else {
+            for (let i = 1; i <= tongnen_lap_nhatban; i++) {
+        backgrounds.push(`b${i}.png`);
+        }
+        }
     }
+    else {
+        if (styleMode) {
+            for (let i = 1; i <= tongnen_girl; i++) {
+                backgrounds.push(`${i}.png`);
+            }
+            } else {
+                for (let i = 1; i <= tongnen_nhatban; i++) {
+            backgrounds.push(`x${i}.png`);
+            }
+            }
+    }
+
     return backgrounds;
   }
 
@@ -242,6 +259,20 @@ function checkCardsAndChangeBackground() {
     backgrounds = getBackgroundList();
     changeBackground();
   });
+
+let isMobile = window.innerWidth <= 1000; // lưu chế độ ban đầu
+
+window.addEventListener('resize', () => {
+  const nowMobile = window.innerWidth <= 1000;
+
+  // Chỉ chạy khi chuyển chế độ (mobile <-> desktop)
+  if (nowMobile !== isMobile) {
+    isMobile = nowMobile; // cập nhật trạng thái
+    backgrounds = getBackgroundList(); 
+    changeBackground();
+  }
+});
+
 
   // Gọi load flashcards lần đầu khi trang tải
   createFlashcards('あ', 'ん');
