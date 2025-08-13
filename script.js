@@ -104,7 +104,7 @@
   // Lấy url ảnh nền kế tiếp
   const nextBgUrl = backgrounds[nextBgIndex];
   // Gán ảnh nền cho mặt trước
-  front.style.backgroundImage = `linear-gradient(rgba(24, 7, 155, 0.8), rgba(24, 7, 155, 0.238)), url('${nextBgUrl}')`;
+  front.style.backgroundImage = `linear-gradient(rgba(24, 7, 155, 0.8), rgba(32, 1, 135, 0.72), rgba(111, 4, 4, 0.72), ), url('${nextBgUrl}')`;
 
   const back = document.createElement('div');
   back.className = 'face back';
