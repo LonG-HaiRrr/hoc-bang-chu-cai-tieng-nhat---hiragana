@@ -212,22 +212,25 @@ body > * {
     let cardsToShow = hiraganaList.slice(startIdx, endIdx + 1);
     shuffleArray(cardsToShow);
 
-    const maxWidth = flashcardsDiv.clientWidth;
-    const maxHeight = flashcardsDiv.clientHeight;
-    const cardWidth = 120;
-    const cardHeight = 160;
+const flashRect = flashcardsDiv.getBoundingClientRect();
+const cardWidth = 120;
+const cardHeight = 160;
+const padding = 10;
 
     cardsToShow.forEach(item => {
       const card = document.createElement('div');
       card.className = 'card';
 
       // Random vị trí
-// Random với khoảng giới hạn
-const padding = 10; // có thể đổi thành vài pixel nếu muốn cách mép
-const x = Math.random() * (maxWidth - cardWidth - padding * 2) + padding;
-const y = Math.random() * (maxHeight - cardHeight - padding * 2) + padding;
-      card.style.left = `${x}px`;
-      card.style.top = `${y}px`;
+// Chỉ lấy khung tính được khi đủ rộng/cao:
+const allowedWidth = flashRect.width - cardWidth - padding * 2;
+const allowedHeight = flashRect.height - cardHeight - padding * 2;
+
+// Nếu vùng quá nhỏ, gán về 0
+const x = (allowedWidth > 0 ? Math.random() * allowedWidth : 0) + padding;
+const y = (allowedHeight > 0 ? Math.random() * allowedHeight : 0) + padding;
+card.style.left = `${x}px`;
+card.style.top = `${y}px`;
 
       // Inner card
       const inner = document.createElement('div');
