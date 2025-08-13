@@ -91,22 +91,28 @@
       card.style.top = `${y}px`;
 
         // Inner card
-        const inner = document.createElement('div');
-        inner.className = 'inner-card';
+  const inner = document.createElement('div');
+  inner.className = 'inner-card';
 
-        // Mặt trước
-        const front = document.createElement('div');
-        front.className = 'face front';
-        front.textContent = item.char;
+  const front = document.createElement('div');
+  front.className = 'face front';
+  front.textContent = item.char;
 
-        // Mặt sau
-        const back = document.createElement('div');
-        back.className = 'face back';
-        back.textContent = item.reading;
 
-        inner.appendChild(front);
-        inner.appendChild(back);
-        card.appendChild(inner);
+  // Tính index ảnh nền theo vòng lặp
+  const nextBgIndex = Math.floor(Math.random() * backgrounds.length);
+  // Lấy url ảnh nền kế tiếp
+  const nextBgUrl = backgrounds[nextBgIndex];
+  // Gán ảnh nền cho mặt trước
+  front.style.backgroundImage = `linear-gradient(rgba(24, 7, 155, 0.8), rgba(24, 7, 155, 0.238)), url('${nextBgUrl}')`;
+
+  const back = document.createElement('div');
+  back.className = 'face back';
+  back.textContent = item.reading;
+
+  inner.appendChild(front);
+  inner.appendChild(back);
+  card.appendChild(inner);
 
         // Logic đếm click + ẩn sau 3 giây
         let clickCount = 0;
@@ -258,6 +264,7 @@ function checkCardsAndChangeBackground() {
     styleMode = this.checked;
     backgrounds = getBackgroundList();
     changeBackground();
+    createFlashcards(startChar, endChar);
   });
 
 let isMobile = window.innerWidth <= 1000; // lưu chế độ ban đầu
@@ -270,6 +277,7 @@ window.addEventListener('resize', () => {
     isMobile = nowMobile; // cập nhật trạng thái
     backgrounds = getBackgroundList(); 
     changeBackground();
+    createFlashcards(startChar, endChar);
   }
 });
 

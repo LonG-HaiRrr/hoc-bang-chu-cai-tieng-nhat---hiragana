@@ -5,7 +5,7 @@
       /* height: 100vh; */
       margin: 0;
       overflow: hidden;
-      background-image: url('2.png');
+      background-image: url('1.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -83,6 +83,10 @@
       color: #ffffff;
       font-size: 50px;
       font-weight: bold;
+      background-image: linear-gradient(rgba(24, 7, 155, 0.8), rgba(24, 7, 155, 0.238)), url('1.png');
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
     }
     .back {
       background: #bf7b15;
@@ -196,12 +200,16 @@
       background-color: rgb(45, 152, 142);
       color: white;
   }
-    .front {
-      background: #022dbd;
-      color: #ffffff;
-      font-size: 90px;
-      font-weight: bold;
-    }
+.front {
+  background-image: linear-gradient(rgba(24, 7, 155, 0.8), rgba(24, 7, 155, 0.238)), url('1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  font-size: 90px;
+  font-weight: bold;
+}
+
     .back {
       background: #bf7b15;
       transform: rotateY(180deg);
