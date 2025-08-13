@@ -357,9 +357,17 @@ card.addEventListener('click', () => {
     createFlashcards(startChar, endChar);
   });
   // Danh sách các file nền
-const backgrounds = ['2.png', '3.png', '4.png', '5.png', '6.png'];
-let currentBgIndex = Math.floor(Math.random() * backgrounds.length);
-document.body.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
+          // const backgrounds = ['2.png', '3.png', '4.png', '5.png', '6.png']; 
+// Giả sử bạn biết số ảnh tối đa sẽ là 200
+  const totalBackgrounds = 10;
+  const backgrounds = [];
+  for (let i = 1; i <= totalBackgrounds; i++) {
+    backgrounds.push(`${i}.png`);
+  }
+  let currentBgIndex = Math.floor(Math.random() * backgrounds.length);
+  document.body.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
+
+
 
 // Đổi nền tiếp theo
 function changeBackground() {
