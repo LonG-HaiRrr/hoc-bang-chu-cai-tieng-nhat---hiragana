@@ -199,7 +199,7 @@
             // const backgrounds = ['2.png', '3.png', '4.png', '5.png', '6.png']; 
   // Giả sử bạn biết số ảnh tối đa sẽ là 200
     const tongnen_girl = 15;
-    const tongnen_nhatban = 18;
+    const tongnen_nhatban = 33;
     const tongnen_lap_girl = 10;
     const tongnen_lap_nhatban = 12;
 
