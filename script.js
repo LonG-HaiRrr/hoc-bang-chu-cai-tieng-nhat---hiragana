@@ -201,7 +201,7 @@
     const tongnen_girl = 15;
     const tongnen_nhatban = 10;
     const tongnen_lap_girl = 10;
-    const tongnen_lap_nhatban = 5;
+    const tongnen_lap_nhatban = 12;
 
   let styleMode = false; // false = bộ 1, true = bộ 2
 
