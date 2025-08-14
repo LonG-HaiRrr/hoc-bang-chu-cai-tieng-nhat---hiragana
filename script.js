@@ -208,29 +208,28 @@
   function getBackgroundList() {
     const backgrounds = [];
     const chedo = getPadding();
-    if(chedo < 50){
-        if (styleMode) {
+    
+  if (chedo < 50) {
+    if (styleMode) {
         for (let i = 1; i <= tongnen_lap_girl; i++) {
-            backgrounds.push(`a${i}.png`);
+            backgrounds.push(`lap_girl/${i}.png`);
         }
-        } else {
-            for (let i = 1; i <= tongnen_lap_nhatban; i++) {
-        backgrounds.push(`b${i}.png`);
-        }
+    } else {
+        for (let i = 1; i <= tongnen_lap_nhatban; i++) {
+            backgrounds.push(`lap_nhatban/${i}.png`);
         }
     }
-    else {
-        if (styleMode) {
-            for (let i = 1; i <= tongnen_girl; i++) {
-                backgrounds.push(`${i}.png`);
-            }
-            } else {
-                for (let i = 1; i <= tongnen_nhatban; i++) {
-            backgrounds.push(`x${i}.png`);
-            }
-            }
+} else {
+    if (styleMode) {
+        for (let i = 1; i <= tongnen_girl; i++) {
+            backgrounds.push(`girl/${i}.png`);
+        }
+    } else {
+        for (let i = 1; i <= tongnen_nhatban; i++) {
+            backgrounds.push(`nhatban/${i}.png`);
+        }
     }
-
+}
     return backgrounds;
   }
 

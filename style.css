@@ -81,7 +81,7 @@
     .front {
       background: #022dbd;
       color: #ffffff;
-      font-size: 50px;
+      font-size: 70px;
       font-weight: bold;
       background-image: linear-gradient(rgba(24, 7, 155, 0.8), rgba(42, 18, 225, 0.238)), url('1.png');
       background-size: cover !important;
@@ -91,7 +91,7 @@
     .back {
       background: #bf7b15;
       transform: rotateY(180deg);
-      font-size: 24px;
+      font-size: 50px;
     }
     #controls label {
     color: yellow; /* Hoặc bất kỳ màu nào bạn muốn */
