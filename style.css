@@ -206,13 +206,13 @@
   background-position: center;
   background-repeat: no-repeat;
   color: #ffffff;
-  font-size: 90px;
+  font-size: 105px;
   font-weight: bold;
 }
 
     .back {
       background: #bf7b15;
       transform: rotateY(180deg);
-      font-size: 90px;
+      font-size: 80px;
     }
   }
