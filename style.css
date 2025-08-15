@@ -163,6 +163,7 @@
   }
 
 
+
   /* Media Query cho màn hình nhỏ hơn 1000px */
   @media (max-width: 1000px) {
     #controls {
@@ -217,7 +218,9 @@
       font-size: 80px;
     }
 
-
+  .create_card {
+padding-top: 13px;
+  }
     .lap_girl{
       display: none;
     }
@@ -232,6 +235,7 @@
       font-weight: bold;
       color: yellow;
     }
+    
   }
 .phone_girl {
   display: none;
