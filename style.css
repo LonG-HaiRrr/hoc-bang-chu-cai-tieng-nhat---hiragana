@@ -187,9 +187,6 @@
     border-bottom: 30px;
 
   }
-  .kata {
-    display: none;
-  }
     .card {
       height: 250px;
       width: 180px;
@@ -219,4 +216,25 @@
       transform: rotateY(180deg);
       font-size: 80px;
     }
+
+
+    .lap_girl{
+      display: none;
+    }
+    .phone_girl {
+      padding-top: 5px;
+      padding-left: 15px;
+      display: flex !important;
+      justify-content: center; /* Căn ngang */
+      align-items: center;     /* Căn dọc */
+      text-align: center;      /* Nếu muốn text căn giữa */
+      font-size: large;
+      font-weight: bold;
+      color: yellow;
+    }
   }
+.phone_girl {
+  display: none;
+}
+
+
