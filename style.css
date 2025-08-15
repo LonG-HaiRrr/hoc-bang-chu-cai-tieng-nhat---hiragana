@@ -81,7 +81,7 @@
     .front {
       background: #022dbd;
       color: #ffffff;
-      font-size: 70px;
+      font-size: 60px;
       font-weight: bold;
       background-image: linear-gradient(rgba(24, 7, 155, 0.8), rgba(42, 18, 225, 0.238)), url('1.png');
       background-size: cover !important;
@@ -206,7 +206,7 @@
   background-position: center;
   background-repeat: no-repeat;
   color: #ffffff;
-  font-size: 105px;
+  font-size: 90px;
   font-weight: bold;
 }
 

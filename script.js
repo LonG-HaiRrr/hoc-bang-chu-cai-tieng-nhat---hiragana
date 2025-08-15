@@ -201,7 +201,7 @@
     const tongnen_girl = 15;
     const tongnen_nhatban = 33;
     const tongnen_lap_girl = 14;
-    const tongnen_lap_nhatban = 20;
+    const tongnen_lap_nhatban = 30;
 
   let styleMode = false; // false = bộ 1, true = bộ 2
 
@@ -286,4 +286,5 @@ window.addEventListener('resize', () => {
 
 
   // Gọi load flashcards lần đầu khi trang tải
-  createFlashcards('あ', 'ん');
+  createFlashcards('ぴゃ', 'ぴょ');
+    // {char: 'ぴゃ', reading: 'pya'}, {char: 'ぴゅ', reading: 'pyu'}, {char: 'ぴょ', reading: 'pyo'}
