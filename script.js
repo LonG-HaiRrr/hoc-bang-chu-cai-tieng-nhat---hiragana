@@ -12,13 +12,11 @@
     {char: 'や', reading: 'ya'}, {char: 'ゆ', reading: 'yu'}, {char: 'よ', reading: 'yo'},
     {char: 'ら', reading: 'ra'}, {char: 'り', reading: 'ri'}, {char: 'る', reading: 'ru'}, {char: 'れ', reading: 're'}, {char: 'ろ', reading: 'ro'},
     {char: 'わ', reading: 'wa'}, {char: 'を', reading: 'wo'}, {char: 'ん', reading: 'n'},
-
     // Dakuon
     {char: 'が', reading: 'ga'}, {char: 'ぎ', reading: 'gi'}, {char: 'ぐ', reading: 'gu'}, {char: 'げ', reading: 'ge'}, {char: 'ご', reading: 'go'},
     {char: 'ざ', reading: 'za'}, {char: 'じ', reading: 'ji'}, {char: 'ず', reading: 'zu'}, {char: 'ぜ', reading: 'ze'}, {char: 'ぞ', reading: 'zo'},
     {char: 'だ', reading: 'da'}, {char: 'ぢ', reading: 'ji'}, {char: 'づ', reading: 'zu'}, {char: 'で', reading: 'de'}, {char: 'ど', reading: 'do'},
     {char: 'ば', reading: 'ba'}, {char: 'び', reading: 'bi'}, {char: 'ぶ', reading: 'bu'}, {char: 'べ', reading: 'be'}, {char: 'ぼ', reading: 'bo'},
-
     // Handakuon
     {char: 'ぱ', reading: 'pa'}, {char: 'ぴ', reading: 'pi'}, {char: 'ぷ', reading: 'pu'}, {char: 'ぺ', reading: 'pe'}, {char: 'ぽ', reading: 'po'},
 
@@ -35,11 +33,45 @@
     {char: 'びゃ', reading: 'bya'}, {char: 'びゅ', reading: 'byu'}, {char: 'びょ', reading: 'byo'},
     {char: 'ぴゃ', reading: 'pya'}, {char: 'ぴゅ', reading: 'pyu'}, {char: 'ぴょ', reading: 'pyo'}
   ];
+// Danh sách Katakana
+const katakanaList = [
+    {char: 'ア', reading: 'a'}, {char: 'イ', reading: 'i'}, {char: 'ウ', reading: 'u'}, {char: 'エ', reading: 'e'}, {char: 'オ', reading: 'o'},
+    {char: 'カ', reading: 'ka'}, {char: 'キ', reading: 'ki'}, {char: 'ク', reading: 'ku'}, {char: 'ケ', reading: 'ke'}, {char: 'コ', reading: 'ko'},
+    {char: 'サ', reading: 'sa'}, {char: 'シ', reading: 'shi'}, {char: 'ス', reading: 'su'}, {char: 'セ', reading: 'se'}, {char: 'ソ', reading: 'so'},
+    {char: 'タ', reading: 'ta'}, {char: 'チ', reading: 'chi'}, {char: 'ツ', reading: 'tsu'}, {char: 'テ', reading: 'te'}, {char: 'ト', reading: 'to'},
+    {char: 'ナ', reading: 'na'}, {char: 'ニ', reading: 'ni'}, {char: 'ヌ', reading: 'nu'}, {char: 'ネ', reading: 'ne'}, {char: 'ノ', reading: 'no'},
+    {char: 'ハ', reading: 'ha'}, {char: 'ヒ', reading: 'hi'}, {char: 'フ', reading: 'fu'}, {char: 'ヘ', reading: 'he'}, {char: 'ホ', reading: 'ho'},
+    {char: 'マ', reading: 'ma'}, {char: 'ミ', reading: 'mi'}, {char: 'ム', reading: 'mu'}, {char: 'メ', reading: 'me'}, {char: 'モ', reading: 'mo'},
+    {char: 'ヤ', reading: 'ya'}, {char: 'ユ', reading: 'yu'}, {char: 'ヨ', reading: 'yo'},
+    {char: 'ラ', reading: 'ra'}, {char: 'リ', reading: 'ri'}, {char: 'ル', reading: 'ru'}, {char: 'レ', reading: 're'}, {char: 'ロ', reading: 'ro'},
+    {char: 'ワ', reading: 'wa'}, {char: 'ヲ', reading: 'wo'}, {char: 'ン', reading: 'n'},
+    // Dakuon
+    {char: 'ガ', reading: 'ga'}, {char: 'ギ', reading: 'gi'}, {char: 'グ', reading: 'gu'}, {char: 'ゲ', reading: 'ge'}, {char: 'ゴ', reading: 'go'},
+    {char: 'ザ', reading: 'za'}, {char: 'ジ', reading: 'ji'}, {char: 'ズ', reading: 'zu'}, {char: 'ゼ', reading: 'ze'}, {char: 'ゾ', reading: 'zo'},
+    {char: 'ダ', reading: 'da'}, {char: 'ヂ', reading: 'ji'}, {char: 'ヅ', reading: 'zu'}, {char: 'デ', reading: 'de'}, {char: 'ド', reading: 'do'},
+    {char: 'バ', reading: 'ba'}, {char: 'ビ', reading: 'bi'}, {char: 'ブ', reading: 'bu'}, {char: 'ベ', reading: 'be'}, {char: 'ボ', reading: 'bo'},
+    // Handakuon
+    {char: 'パ', reading: 'pa'}, {char: 'ピ', reading: 'pi'}, {char: 'プ', reading: 'pu'}, {char: 'ペ', reading: 'pe'}, {char: 'ポ', reading: 'po'},
+    // Yōon
+    {char: 'キャ', reading: 'kya'}, {char: 'キュ', reading: 'kyu'}, {char: 'キョ', reading: 'kyo'},
+    {char: 'シャ', reading: 'sha'}, {char: 'シュ', reading: 'shu'}, {char: 'ショ', reading: 'sho'},
+    {char: 'チャ', reading: 'cha'}, {char: 'チュ', reading: 'chu'}, {char: 'チョ', reading: 'cho'},
+    {char: 'ニャ', reading: 'nya'}, {char: 'ニュ', reading: 'nyu'}, {char: 'ニョ', reading: 'nyo'},
+    {char: 'ヒャ', reading: 'hya'}, {char: 'ヒュ', reading: 'hyu'}, {char: 'ヒョ', reading: 'hyo'},
+    {char: 'ミャ', reading: 'mya'}, {char: 'ミュ', reading: 'myu'}, {char: 'ミョ', reading: 'myo'},
+    {char: 'リャ', reading: 'rya'}, {char: 'リュ', reading: 'ryu'}, {char: 'リョ', reading: 'ryo'},
+    {char: 'ギャ', reading: 'gya'}, {char: 'ギュ', reading: 'gyu'}, {char: 'ギョ', reading: 'gyo'},
+    {char: 'ジャ', reading: 'ja'}, {char: 'ジュ', reading: 'ju'}, {char: 'ジョ', reading: 'jo'},
+    {char: 'ビャ', reading: 'bya'}, {char: 'ビュ', reading: 'byu'}, {char: 'ビョ', reading: 'byo'},
+    {char: 'ピャ', reading: 'pya'}, {char: 'ピュ', reading: 'pyu'}, {char: 'ピョ', reading: 'pyo'}
+];
+let currentList = hiraganaList; 
+let isKatakana = false;
 
 
       function getCharIndex(input) {
     // Cho phép nhập cả Hiragana hoặc Romaji (Latin)
-    return hiraganaList.findIndex(item => 
+    return currentList.findIndex(item => 
       item.char === input || item.reading.toLowerCase() === input.toLowerCase()
     );
   }
@@ -66,7 +98,7 @@
       }
 
       // Lấy danh sách cần hiển thị và trộn
-      let cardsToShow = hiraganaList.slice(startIdx, endIdx + 1);
+      let cardsToShow = currentList.slice(startIdx, endIdx + 1);
       shuffleArray(cardsToShow);
 
   const flashRect = flashcardsDiv.getBoundingClientRect();
@@ -270,6 +302,15 @@ function checkCardsAndChangeBackground() {
   createFlashcards(startChar, endChar);
   });
 
+  document.getElementById('kataToggle').addEventListener('change', function () {
+    isKatakana = this.checked;
+    currentList = isKatakana ? katakanaList : hiraganaList;
+    const startChar = document.getElementById('startChar').value.trim() || (isKatakana ? 'ア' : 'あ');
+    const endChar = document.getElementById('endChar').value.trim() || (isKatakana ? 'ン' : 'ん');
+    createFlashcards(startChar, endChar);
+});
+
+
 let isMobile = window.innerWidth <= 1000; // lưu chế độ ban đầu
 
 window.addEventListener('resize', () => {
@@ -286,5 +327,8 @@ window.addEventListener('resize', () => {
 
 
   // Gọi load flashcards lần đầu khi trang tải
-  createFlashcards('あ', 'ん');
+  // createFlashcards('あ', 'ん');
     // {char: 'ぴゃ', reading: 'pya'}, {char: 'ぴゅ', reading: 'pyu'}, {char: 'ぴょ', reading: 'pyo'}
+
+    createFlashcards(isKatakana ? 'ア' : 'あ', isKatakana ? 'ン' : 'ん');
+

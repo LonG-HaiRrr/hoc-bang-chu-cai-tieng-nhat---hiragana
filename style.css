@@ -30,7 +30,8 @@
 
     #controls {
       padding: 10px;
-      background: rgba(75, 89, 139, 0.94)
+      background: rgba(75, 89, 139, 0.94);
+      display: flex;
     }
     input[type="text"] {
       width: 100px;
@@ -106,6 +107,7 @@
       height: 50px;
       width: 130px;
       color: #000;
+      max-width: max-content;
   }
   #generateBtn:hover{
       background-color: rgb(45, 152, 142);
