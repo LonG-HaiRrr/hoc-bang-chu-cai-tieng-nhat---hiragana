@@ -108,6 +108,7 @@
       width: 130px;
       color: #000;
       max-width: max-content;
+      padding: 0 20px 0 20px;
   }
   #generateBtn:hover{
       background-color: rgb(45, 152, 142);
@@ -194,7 +195,7 @@
     #generateBtn {
       background-color: turquoise;
       color: #000;
-      font-size: 15px;
+      font-size: 10px;
       font-weight: bold;
   }
   #generateBtn:hover{
@@ -223,7 +224,7 @@
     }
     .phone_girl {
       padding-top: 5px;
-      padding-left: 15px;
+      padding-left: 15px;     /* thêm vào cho cân tại cái nút gạt cũng trong 1 label */
       display: flex !important;
       justify-content: center; /* Căn ngang */
       align-items: center;     /* Căn dọc */
