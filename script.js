@@ -286,5 +286,5 @@ window.addEventListener('resize', () => {
 
 
   // Gọi load flashcards lần đầu khi trang tải
-  createFlashcards('ぴゃ', 'ぴょ');
+  createFlashcards('あ', 'ん');
     // {char: 'ぴゃ', reading: 'pya'}, {char: 'ぴゅ', reading: 'pyu'}, {char: 'ぴょ', reading: 'pyo'}
