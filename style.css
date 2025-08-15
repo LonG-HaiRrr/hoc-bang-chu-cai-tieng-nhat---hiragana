@@ -187,7 +187,9 @@
     border-bottom: 30px;
 
   }
-
+  .kata {
+    display: none;
+  }
     .card {
       height: 250px;
       width: 180px;
