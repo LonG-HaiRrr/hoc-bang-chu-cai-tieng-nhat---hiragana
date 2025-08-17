@@ -12,6 +12,7 @@ const kanaList = [
     {kana: 'わ', romaji: 'wa'}, {kana: 'を', romaji: 'wo'}, {kana: 'ん', romaji: 'n'}
 ];
 
+// DOM elements
 const startInput = document.getElementById('startChar');
 const endInput = document.getElementById('endChar');
 const startBtn = document.getElementById('startBtn');
@@ -24,6 +25,7 @@ const countdown = document.getElementById('remainCount');
 let activeList = [];
 let currentIdx = 0;
 
+// Tính năng luyện chữ cái
 startBtn.addEventListener('click', () => {
     let startVal = startInput.value.trim().toLowerCase();
     let endVal = endInput.value.trim().toLowerCase();
@@ -59,14 +61,13 @@ function showCurrentKana() {
 
 audioBtn.addEventListener('click', () => {
     let curr = activeList[currentIdx];
-    let audioFile = `audio/${curr.kana}.mp3`; 
+    let audioFile = `audio/${curr.kana}.mp3`;
     let audio = new Audio(audioFile);
     audio.onerror = () => {
         alert('Chữ này chưa hỗ trợ!');
     };
     audio.play();
 });
-
 
 nextBtn.addEventListener('click', () => {
     if (currentIdx + 1 < activeList.length) {
@@ -78,8 +79,7 @@ nextBtn.addEventListener('click', () => {
     }
 });
 
-// --- Phần canvas (giữ nguyên logic cũ, trừ những cập nhật cần thiết cho hiển thị) ---
-
+// --- Chức năng canvas hỗ trợ touch (vẽ trên mobile và desktop) ---
 const canvas = document.getElementById("signature-pad");
 const clearBtn = document.getElementById("clear-btn");
 const saveBtn = document.getElementById("save-btn");
@@ -87,6 +87,23 @@ const context = canvas.getContext("2d");
 let display = document.getElementById("show");
 let painting = false;
 let drawStart = false;
+
+// Xử lý vị trí vẽ cho cả mouse và touch
+function getCanvasPos(e) {
+    let rect = canvas.getBoundingClientRect();
+    let clientX, clientY;
+    if (e.type.startsWith("touch")) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches.clientY;
+    } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+    }
+    return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+    };
+}
 
 function startPosition(e) {
     painting = true;
@@ -100,39 +117,31 @@ function finishedPosition() {
     saveState();
 }
 
+// Vẽ trên canvas
 function draw(e) {
+    if (e.cancelable) e.preventDefault(); // Chặn cuộn màn hình trên mobile
     if (!painting) return;
-    let clientX, clientY;
-    if (e.type.startsWith("touch")) {
-        clientX = e.touches[0].clientX;
-        clientY = e.touches.clientY;
-    } else {
-        clientX = e.clientX;
-        clientY = e.clientY;
-    }
+    let pos = getCanvasPos(e);
 
     context.lineWidth = 2;
     context.lineCap = "round";
     context.lineJoin = "round";
     context.strokeStyle = "black";
 
-    const x = clientX - canvas.getBoundingClientRect().left;
-    const y = clientY - canvas.getBoundingClientRect().top;
-
     if (painting) {
-        context.lineTo(x, y);
+        context.lineTo(pos.x, pos.y);
         context.stroke();
         context.beginPath();
-        context.moveTo(x, y);
+        context.moveTo(pos.x, pos.y);
     } else {
-        context.moveTo(x, y);
+        context.moveTo(pos.x, pos.y);
     }
 }
 
+// Khôi phục canvas khi load lại
 function saveState() {
     localStorage.setItem("canvas", canvas.toDataURL());
 }
-
 function loadState() {
     const savedData = localStorage.getItem("canvas");
     if (savedData) {
@@ -145,6 +154,7 @@ function loadState() {
     }
 }
 
+// Sự kiện mouse & touch (đã fix chuẩn cho mobile)
 canvas.addEventListener("mousedown", (e) => {
     painting = true;
     drawStart = true;
@@ -152,14 +162,24 @@ canvas.addEventListener("mousedown", (e) => {
 });
 canvas.addEventListener("mouseup", finishedPosition);
 canvas.addEventListener("mousemove", draw);
+
+// MOBILE: dùng touch-action none trong CSS file, thêm e.preventDefault() vào các sự kiện dưới
 canvas.addEventListener("touchstart", (e) => {
+    if (e.cancelable) e.preventDefault();
     painting = true;
     drawStart = true;
     startPosition(e);
 });
-canvas.addEventListener("touchend", finishedPosition);
-canvas.addEventListener("touchmove", draw);
+canvas.addEventListener("touchend", (e) => {
+    if (e.cancelable) e.preventDefault();
+    finishedPosition();
+});
+canvas.addEventListener("touchmove", (e) => {
+    if (e.cancelable) e.preventDefault();
+    draw(e);
+});
 
+// Các nút thao tác canvas
 clearBtn.addEventListener("click", () => {
     drawStart = false;
     context.clearRect(0, 0, canvas.width, canvas.height);
