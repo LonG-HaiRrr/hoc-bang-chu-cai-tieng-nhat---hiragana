@@ -332,3 +332,6 @@ window.addEventListener('resize', () => {
 
     createFlashcards(isKatakana ? 'ア' : 'あ', isKatakana ? 'ン' : 'ん');
 
+   document.getElementById('btn_luyenchu').onclick = function() {
+        window.location.href = 'luyen_chu';
+    }

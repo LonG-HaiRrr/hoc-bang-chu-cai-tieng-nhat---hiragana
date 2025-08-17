@@ -1,0 +1,125 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #014223;
+}
+
+.container {
+  width: 500px;
+  margin: auto;
+  margin-top: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding-bottom: 30px;
+}
+
+.settings {
+
+  display: flex;
+  align-items: center;
+background-color: #94311a;
+  gap: 10px;
+  padding: 20px 0 20px 20px;
+}
+
+.settings label, .settings input {
+  font-size: 17px;
+}
+
+.settings button {
+  padding: 7px 15px;
+  background-color: #068648;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#infoBox {
+  margin: 30px;
+  padding: 12px;
+  border-radius: 7px;
+  background: #f9f9f9;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+#kanaInfo h2 {
+  font-size: 36px;
+  margin-bottom: 2px;
+}
+
+#kanaInfo p {
+  font-size: 18px;
+  color: #219f69;
+}
+
+#infoBox button {
+  padding: 5px 12px;
+  margin-right: 4px;
+  background-color: #1ad079;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+canvas {
+  margin: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 3px solid #1ad079;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.btn button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #1ad079;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+
+#show {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signature-img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 8px;
+}
+
+.error {
+  color: #f66646;
+  margin: 10px 0;
+}
+
+#countdown {
+  font-size: 16px;
+  color: #219f69;
+  margin-top: 8px;
+}
