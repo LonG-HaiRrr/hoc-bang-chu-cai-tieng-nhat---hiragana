@@ -42,7 +42,7 @@ background-color: #94311a;
 }
 
 #infoBox {
-  margin: 30px;
+  margin: 30px 30px 0 30px;
   padding: 12px;
   border-radius: 7px;
   background: #f9f9f9;
@@ -88,6 +88,7 @@ canvas {
 .btn {
   text-align: center;
   margin-bottom: 10px;
+  margin-top: 30px;
 }
 
 .btn button {
