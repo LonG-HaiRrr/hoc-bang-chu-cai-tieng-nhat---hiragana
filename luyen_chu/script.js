@@ -93,8 +93,11 @@ function getCanvasPos(e) {
     let rect = canvas.getBoundingClientRect();
     let clientX, clientY;
     if (e.type.startsWith("touch")) {
-        clientX = e.touches[0].clientX;
-        clientY = e.touches.clientY;
+        // touchend sẽ không có e.touches, dùng e.changedTouches thay thế
+        const touch = e.touches || e.changedTouches;
+        if (!touch) return null;
+        clientX = touch.clientX;
+        clientY = touch.clientY;
     } else {
         clientX = e.clientX;
         clientY = e.clientY;
@@ -104,6 +107,7 @@ function getCanvasPos(e) {
         y: clientY - rect.top
     };
 }
+
 
 function startPosition(e) {
     painting = true;
@@ -119,24 +123,20 @@ function finishedPosition() {
 
 // Vẽ trên canvas
 function draw(e) {
-    if (e.cancelable) e.preventDefault(); // Chặn cuộn màn hình trên mobile
+    if (e.cancelable) e.preventDefault();
     if (!painting) return;
     let pos = getCanvasPos(e);
-
+    if (!pos) return; // chỉ vẽ khi có toạ độ đúng
     context.lineWidth = 2;
     context.lineCap = "round";
     context.lineJoin = "round";
     context.strokeStyle = "black";
-
-    if (painting) {
-        context.lineTo(pos.x, pos.y);
-        context.stroke();
-        context.beginPath();
-        context.moveTo(pos.x, pos.y);
-    } else {
-        context.moveTo(pos.x, pos.y);
-    }
+    context.lineTo(pos.x, pos.y);
+    context.stroke();
+    context.beginPath();
+    context.moveTo(pos.x, pos.y);
 }
+
 
 // Khôi phục canvas khi load lại
 function saveState() {
@@ -155,29 +155,20 @@ function loadState() {
 }
 
 // Sự kiện mouse & touch (đã fix chuẩn cho mobile)
-canvas.addEventListener("mousedown", (e) => {
-    painting = true;
-    drawStart = true;
-    startPosition(e);
-});
+canvas.addEventListener("mousedown", startPosition);
 canvas.addEventListener("mouseup", finishedPosition);
 canvas.addEventListener("mousemove", draw);
 
-// MOBILE: dùng touch-action none trong CSS file, thêm e.preventDefault() vào các sự kiện dưới
 canvas.addEventListener("touchstart", (e) => {
     if (e.cancelable) e.preventDefault();
-    painting = true;
-    drawStart = true;
-    startPosition(e);
+    startPosition(e); // painting = true ở trong startPosition
 });
 canvas.addEventListener("touchend", (e) => {
     if (e.cancelable) e.preventDefault();
     finishedPosition();
 });
-canvas.addEventListener("touchmove", (e) => {
-    if (e.cancelable) e.preventDefault();
-    draw(e);
-});
+canvas.addEventListener("touchmove", draw);
+
 
 // Các nút thao tác canvas
 clearBtn.addEventListener("click", () => {
