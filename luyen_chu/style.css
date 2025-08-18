@@ -4,124 +4,126 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-
 body {
-  background-color: #014223;
-}
-
-.container {
-  width: 500px;
-  margin: auto;
-  margin-top: 30px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding-bottom: 30px;
-}
-
-.settings {
-
-  display: flex;
-  align-items: center;
-background-color: #94311a;
-  gap: 10px;
-  padding: 20px 0 20px 20px;
-}
-
-.settings label, .settings input {
-  font-size: 17px;
-}
-
-.settings button {
-  padding: 7px 15px;
-  background-color: #068648;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-#infoBox {
-  margin: 30px 30px 0 30px;
-  padding: 12px;
-  border-radius: 7px;
-  background: #f9f9f9;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-}
-
-#kanaInfo h2 {
-  font-size: 36px;
-  margin-bottom: 2px;
-}
-
-#kanaInfo p {
-  font-size: 18px;
-  color: #219f69;
-}
-
-#infoBox button {
-  padding: 5px 12px;
-  margin-right: 4px;
-  background-color: #1ad079;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
+  background-color: #77185f;
+  touch-action: none;
 }
 
 canvas {
-  margin: 30px;
+  margin: 10px 30px 0 30px;
   background-color: #ffffff;
   border-radius: 10px;
   border: 3px solid #1ad079;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-    touch-action: none;
 }
 
-.btn {
-  text-align: center;
-  margin-bottom: 10px;
-  margin-top: 30px;
-}
-
-.btn button {
-  margin: 0 5px;
+button {
+  margin: 5px 6px 5px;
   padding: 5px 10px;
   cursor: pointer;
-  background-color: #1ad079;
+  background-color: #0bc9c9;
   border: none;
   border-radius: 5px;
-  color: #fff;
-  font-weight: bold;
 }
-
 #show {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
-
 .signature-img {
   width: 100px;
   height: 100px;
-  margin-bottom: 8px;
 }
-
 .error {
   color: #f66646;
   margin: 10px 0;
 }
 
-#countdown {
-  font-size: 16px;
-  color: #219f69;
-  margin-top: 8px;
+.benphai {
+  background-color: #ffffff;
+  min-width: 500px;
+  min-height: 500px;
+  margin-top: 30px
 }
+
+.zoneve {
+  /* hiện ngang -  giao diện lap */
+  display: flex; 
+    justify-content: center; /* Căn giữa ngang */
+  align-items: center;     /* Căn giữa dọc */
+}
+.phien_am_sau_bam {
+  font-size: 40px;
+  display: flex;
+  justify-content: center; /* Căn giữa ngang */
+  align-items: center;     /* Căn giữa dọc */
+}
+.ky_tu {
+  font-size: 130px;  
+  display: flex;
+  color: #4e0158;    
+}
+.settings {
+  margin-bottom: 10px;
+  padding: 0 100px 0 300px;
+  background-color: rgb(54, 6, 99);
+  color: rgb(216, 218, 132);
+  font-size: 19px;
+  font-weight: bolder;
+
+}
+.chu_nhap_vao {
+  max-width: 100px;
+  height: 30px;
+}
+
+@media (max-width: 990px) {
+  .zoneve {
+    display: block;
+  }
+  .benphai {
+    margin: 0 20px 0 20px;
+    min-width: 300px !important;
+    min-height: 300px !important;
+    font-size: small;
+  }
+  .chu_nhap_vao {
+  max-width: 60px;
+  font-size: 16px;
+  height: 20px;
+  }
+  .settings {
+    padding: 0 0 0 10px;
+    font-size: 10px;
+    background-color: #595f07;
+    margin: 0;
+  }
+
+  .phien_am_sau_bam {
+      color: #9b0c0c;
+      font-weight: bolder;
+      text-align: center;
+      font-size: 15px !important;
+    }
+  .ky_tu {
+    font-size: 30px !important;
+    display: block !important;
+    
+  }
+  .chuan_viettay {
+    transform: scale(0.5) translateY(-0px);
+    transform-origin: top center; /* giữ điểm neo khi scale */ 
+  }
+
+  #countdown {
+    font-size: 8px;
+  }
+  .textt, .chu_chuan{
+    color: #06ad51;
+    font-size: 8px;
+  }
+
+}
+
+  
+

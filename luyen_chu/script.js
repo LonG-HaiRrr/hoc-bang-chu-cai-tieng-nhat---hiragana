@@ -1,3 +1,130 @@
+const canvas = document.getElementById("signature-pad");
+const clearBtn = document.getElementById("clear-btn");
+const context = canvas.getContext("2d");
+let display = document.getElementById("show");
+let painting = false;
+let drawStart = false;
+
+function startPosition(e) {
+  painting = true;
+  drawStart = true;
+  draw(e);
+}
+
+function finishedPosition() {
+  painting = false;
+  context.beginPath();
+  saveState();
+}
+
+function draw(e) {
+  if (!painting) return;
+  let clientX, clientY;
+  if (e.type.startsWith("touch")) {
+    clientX = e.touches[0].clientX;
+    clientY = e.touches[0].clientY;
+  } else {
+    clientX = e.clientX;
+    clientY = e.clientY;
+  }
+
+  context.lineWidth = 2;
+  context.lineCap = "round";
+  context.lineJoin = "round";
+  context.strokeStyle = "black";
+
+  const x = clientX - canvas.offsetLeft;
+  const y = clientY - canvas.offsetTop;
+
+  if (painting) {
+    context.lineTo(x, y);
+    context.stroke();
+    context.beginPath();
+    context.moveTo(x, y);
+  } else {
+    context.moveTo(x, y);
+  }
+}
+
+function saveState() {
+  localStorage.setItem("canvas", canvas.toDataURL());
+}
+
+function loadState() {
+  const savedData = localStorage.getItem("canvas");
+  if (savedData) {
+    const img = new Image();
+    img.src = savedData;
+    img.onload = () => {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(img, 0, 0);
+    };
+  }
+}
+
+canvas.addEventListener("mousedown", (e) => {
+  painting = true;
+  drawStart = true;
+  startPosition(e);
+});
+
+canvas.addEventListener("mouseup", finishedPosition);
+canvas.addEventListener("mousemove", draw);
+
+canvas.addEventListener("touchstart", (e) => {
+  painting = true;
+  drawStart = true;
+  startPosition(e);
+});
+
+canvas.addEventListener("touchend", finishedPosition);
+canvas.addEventListener("touchmove", draw);
+
+clearBtn.addEventListener("click", () => {
+  drawStart = false;
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  setBackgroundImage();
+  saveState();
+  display.innerHTML = "";
+});
+
+
+
+loadState();
+window.onload = (event) => {
+  drawStart = false;
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  saveState();
+};
+
+function setBackgroundImage() {
+    const img = new Image();
+    img.src = "123.png";
+    img.onload = function() {
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+    }
+}
+
+function resizeCanvas() {
+    if (window.innerWidth > 1008) {
+        canvas.width = 600; canvas.height = 600;
+    } else {
+        canvas.width = 300; canvas.height = 300;
+    }
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    setBackgroundImage();
+}
+
+window.addEventListener('resize', resizeCanvas);
+window.addEventListener('load', resizeCanvas);
+
+
+
+
+
+
+
+
 // Dữ liệu chữ cái tiếng Nhật (Hiragana mẫu)
 const kanaList = [
     {kana: 'あ', romaji: 'a'},  {kana: 'い', romaji: 'i'},  {kana: 'う', romaji: 'u'},  {kana: 'え', romaji: 'e'},  {kana: 'お', romaji: 'o'},
@@ -27,6 +154,8 @@ let currentIdx = 0;
 
 // Tính năng luyện chữ cái
 startBtn.addEventListener('click', () => {
+
+    setBackgroundImage();
     let startVal = startInput.value.trim().toLowerCase();
     let endVal = endInput.value.trim().toLowerCase();
     let startIndex = kanaList.findIndex(k => k.romaji === startVal);
@@ -52,7 +181,10 @@ function shuffleArray(array) {
 
 function showCurrentKana() {
     let curr = activeList[currentIdx];
-    kanaInfo.innerHTML = `<h2>${curr.kana}</h2><p>Phiên âm: ${curr.romaji}</p>`;
+    kanaInfo.innerHTML = ` 
+  <div class="phien_am_truoc_bam">
+    Phiên âm: ${curr.romaji}
+  </div>`;
     countdown.textContent = activeList.length - currentIdx - 1;
     // Xoá ảnh đáp án nếu có (chỉ giữ phần chữ & phiên âm)
     let imgs = infoBox.querySelectorAll('img');
@@ -79,127 +211,30 @@ nextBtn.addEventListener('click', () => {
     }
 });
 
-// --- Chức năng canvas hỗ trợ touch (vẽ trên mobile và desktop) ---
-const canvas = document.getElementById("signature-pad");
-const clearBtn = document.getElementById("clear-btn");
-const saveBtn = document.getElementById("save-btn");
-const context = canvas.getContext("2d");
-let display = document.getElementById("show");
-let painting = false;
-let drawStart = false;
+const answerBtn = document.getElementById('answerBtn');
 
-// Xử lý vị trí vẽ cho cả mouse và touch
-function getCanvasPos(e) {
-    let rect = canvas.getBoundingClientRect();
-    let clientX, clientY;
-    if (e.type.startsWith("touch")) {
-        // touchend sẽ không có e.touches, dùng e.changedTouches thay thế
-        const touch = e.touches || e.changedTouches;
-        if (!touch) return null;
-        clientX = touch.clientX;
-        clientY = touch.clientY;
-    } else {
-        clientX = e.clientX;
-        clientY = e.clientY;
-    }
-    return {
-        x: clientX - rect.left,
-        y: clientY - rect.top
-    };
-}
+answerBtn.addEventListener('click', () => {
+  let curr = activeList[currentIdx];
 
+  kanaInfo.innerHTML = `
+  <div class="phien_am_sau_bam">
+    Phiên âm: ${curr.romaji}
+  </div>
 
-function startPosition(e) {
-    painting = true;
-    drawStart = true;
-    draw(e);
-}
-
-function finishedPosition() {
-    painting = false;
-    context.beginPath();
-    saveState();
-}
-
-// Vẽ trên canvas
-function draw(e) {
-    if (e.cancelable) e.preventDefault();
-    if (!painting) return;
-    let pos = getCanvasPos(e);
-    if (!pos) return; // chỉ vẽ khi có toạ độ đúng
-    context.lineWidth = 2;
-    context.lineCap = "round";
-    context.lineJoin = "round";
-    context.strokeStyle = "black";
-    context.lineTo(pos.x, pos.y);
-    context.stroke();
-    context.beginPath();
-    context.moveTo(pos.x, pos.y);
-}
-
-
-// Khôi phục canvas khi load lại
-function saveState() {
-    localStorage.setItem("canvas", canvas.toDataURL());
-}
-function loadState() {
-    const savedData = localStorage.getItem("canvas");
-    if (savedData) {
-        const img = new Image();
-        img.src = savedData;
-        img.onload = () => {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.drawImage(img, 0, 0);
-        };
-    }
-}
-
-// Sự kiện mouse & touch (đã fix chuẩn cho mobile)
-canvas.addEventListener("mousedown", startPosition);
-canvas.addEventListener("mouseup", finishedPosition);
-canvas.addEventListener("mousemove", draw);
-
-canvas.addEventListener("touchstart", (e) => {
-    if (e.cancelable) e.preventDefault();
-    startPosition(e); // painting = true ở trong startPosition
-});
-canvas.addEventListener("touchend", (e) => {
-    if (e.cancelable) e.preventDefault();
-    finishedPosition();
-});
-canvas.addEventListener("touchmove", draw);
-
-
-// Các nút thao tác canvas
-clearBtn.addEventListener("click", () => {
-    drawStart = false;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    saveState();
-    display.innerHTML = "";
+  <div class="chudanhmay" style="display: flex; justify-content: center; align-items: center;">
+    <div class="textt">chữ đánh máy: </div>
+    <div class="ky_tu">
+      ${curr.kana}
+    </div>
+  </div>
+  
+  <div class="chu_chuan" style="display: flex; justify-content: center; align-items: center;>
+    <div class="textt2">chữ viết tay: </div>
+    <div class="chuan_viettay">
+      <img src="${curr.romaji}.png"/>
+    </div>
+  </div>
+  `;
 });
 
-saveBtn.addEventListener("click", () => {
-    if (drawStart) {
-        const dataURL = canvas.toDataURL();
-        let img = document.createElement("img");
-        img.setAttribute("class", "signature-img");
-        img.src = dataURL;
-        const aFilename = document.createElement("a");
-        aFilename.href = dataURL;
-        aFilename.download = "signature.png";
-        aFilename.appendChild(document.createTextNode("signature.png"));
-        aFilename.appendChild(img);
-        display.appendChild(img);
-        display.appendChild(aFilename);
-    } else {
-        display.innerHTML = "Vui lòng ký/viết trước khi lưu";
-    }
-});
 
-loadState();
-
-window.onload = (event) => {
-    drawStart = false;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    saveState();
-};
