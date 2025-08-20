@@ -42,26 +42,41 @@ canvas {
 }
 
 /* Núm trượt */
+/* Núm trượt */
 .slider:before {
   position: absolute;
-  content: "";
+  content: "\48";             /* ví dụ icon user */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;              /* với FA6 cần 900 cho solid */
+  display: flex;                 /* để căn giữa nội dung */
+  align-items: center;
+  justify-content: center;
   height: 22px;
   width: 22px;
   left: 3px;
   top: 3px;
-  background-color: rgb(168, 31, 31);
+  background-color: #a81f1f;
+  color: #fff;                   /* màu icon */
   transition: 0.2s;
-  border-radius: 80%;
+  border-radius: 50%;
+  font-size: 12px;               /* size icon */
 }
 
-/* Trạng thái bật */
-.switch input:checked + .slider {
-  background-color: #10db09;
-}
-
+/* Khi bật, đổi icon nếu muốn */
 .switch input:checked + .slider:before {
   transform: translateX(22px);
+  content: "\4b";              /* icon check */
+  background-color: #946b12;
 }
+
+/* Mẹo tìm mã Unicode: mở trang icon của FA hoặc dùng devtools để xem content. 
+Ví dụ: fa-user = \f007, fa-check = \f00c. */
+/* Trạng thái bật */
+.switch input:checked + .slider {
+  background-color: #c98cfa;
+}
+
+
 
 button {
   margin: 5px 6px 5px;
