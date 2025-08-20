@@ -9,14 +9,22 @@
   <body>
 
     <div class="settings">
-      <a href="/index.html">
-        <i class="fa-solid fa-house" style="font-size: 16px; color: #ffffff;"></i>
-      </a>
       <label for="startChar">Bắt đầu:</label>
       <input class="chu_nhap_vao" type="text" id="startChar" maxlength="3" placeholder="ex: a">
       <label for="endChar" style="margin-left: 10px;">Kết thúc:</label>
       <input class="chu_nhap_vao" type="text" id="endChar" maxlength="3" placeholder="ex: shi">
       <button id="startBtn">Tạo</button>
+      <a href="index.html">
+        <i class="fa-solid fa-house" style="font-size: 16px;"></i>
+      </a>
+      <!-- Toggle Hira/Kata -->
+      <label class="switch">
+        <input type="checkbox" id="modeToggle">
+        <span class="slider"></span>
+      </label>
+      <span id="modeLabel">Hiragana</span>
+
+
     </div>
 
 
@@ -26,9 +34,19 @@
       <canvas id="signature-pad" width="300" height="200"></canvas>
       <div class="benphai">
         <button id="clear-btn"class="btn_zone_benphai"> Xoá </button>
-          <button id="audioBtn" class="btn_zone_benphai">Nghe audio</button>
-          <button id="answerBtn"class="btn_zone_benphai">Xem đáp án</button>
-          <button id="nextBtn"class="btn_zone_benphai">Tiếp theo</button>
+          <button id="audioBtn" class="btn_zone_benphai">Nghe</button>
+          <button id="answerBtn"class="btn_zone_benphai">Xem</button>
+          <button id="nextBtn"class="btn_zone_benphai">Tiếp</button>
+          <select id="strokeWidth">
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+          </select>
+          <button id="colorPickerBtn" style="display: none;"></button>
+          <input type="color" id="colorPicker">
+
           <div id="countdown" style="text-align: right;   margin-right: 15px;">
             Còn lại: 
             <span id="remainCount">0</span>
