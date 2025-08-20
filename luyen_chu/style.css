@@ -5,7 +5,7 @@
   font-family: "Poppins", sans-serif;
 }
 body {
-  background-color: #77185f;
+  background-color: #decdfc  ;
   touch-action: none;
 }
 
@@ -56,7 +56,7 @@ canvas {
 
 /* Trạng thái bật */
 .switch input:checked + .slider {
-  background-color: #0bc9c9;
+  background-color: #07db07;
 }
 
 .switch input:checked + .slider:before {
@@ -163,7 +163,7 @@ button {
   .settings {
     padding: 0 0 0 10px;
     font-size: 10px;
-    background-color: #0ed166;
+    background-color: #45037c;
     margin: 0;
   }
 
@@ -204,6 +204,9 @@ button {
   }
   #strokeWidth {
       width:50px;
+  }
+  #modeLabel {
+    display: none;
   }
 }
 
