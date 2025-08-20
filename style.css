@@ -79,6 +79,14 @@
       align-items: center;
       font-size: 40px;
     }
+.wrapper {
+  display: flex;
+  align-items: center;   /* căn giữa theo chiều dọc của con (ở đây là <a>) */
+  /* justify-content: center;  - nếu muốn giữa theo chiều ngang */
+  height: 78px;          /* ví dụ chiều cao container */
+}
+
+
     .front {
       background: #022dbd;
       color: #ffffff;
