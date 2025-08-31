@@ -85,6 +85,7 @@ button {
   background-color: #0bc9c9;
   border: none;
   border-radius: 5px;
+  font-weight: bolder
 }
 #show {
   display: flex;
@@ -232,8 +233,11 @@ button {
   }
   .switch {
     transform: scale(0.6) translateY(-0px);
-    transform-origin: top center; /* giữ điểm neo khi scale */ 
+    transform-origin: top left; /* giữ điểm neo khi scale */ 
     margin-top: 6px;
+  }
+    #startBtn {
+    margin-left: 5px !important;
   }
 }
 
