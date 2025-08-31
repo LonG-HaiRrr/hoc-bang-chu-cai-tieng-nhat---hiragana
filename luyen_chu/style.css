@@ -139,6 +139,8 @@ button {
     font-size: 16px;
   max-width: 100px;
   height: 30px;
+    text-align: center;   /* chỉ căn giữa ngang chữ nhập */
+    line-height: 30px;    /* căn giữa dọc chữ nhập (hiệu quả với input một dòng) *
 }
 #clear-btn {
   margin-left: 20px;
@@ -179,7 +181,7 @@ button {
   }
   .settings {
     padding: 0 0 0 10px;
-    font-size: 6px;
+    font-size: 9px;
     background-color: #45037c;
     margin: 0;
   }
