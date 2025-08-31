@@ -135,6 +135,7 @@ button {
 
 }
 .chu_nhap_vao {
+    font-size: 16px;
   max-width: 100px;
   height: 30px;
 }
@@ -171,13 +172,13 @@ button {
   }
   
   .chu_nhap_vao {
-  max-width: 60px;
+  max-width: 52px;
   font-size: 16px;
   height: 20px;
   }
   .settings {
     padding: 0 0 0 10px;
-    font-size: 10px;
+    font-size: 6px;
     background-color: #45037c;
     margin: 0;
   }

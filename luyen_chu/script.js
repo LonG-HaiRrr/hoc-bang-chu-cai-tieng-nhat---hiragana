@@ -250,7 +250,7 @@ answerBtn.addEventListener('click', () => {
 
 // Lưu màu và kích thước hiện tại
 let currentStrokeColor = '#000000'; // mặc định ban đầu màu vẽ
-let currentStrokeWidth = 10;
+let currentStrokeWidth = 20;
 
 strokeWidthSelect.addEventListener('change', function () {
   currentStrokeWidth = parseInt(this.value);
