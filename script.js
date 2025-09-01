@@ -330,5 +330,5 @@ window.addEventListener('resize', () => {
   // createFlashcards('あ', 'ん');
     // {char: 'ぴゃ', reading: 'pya'}, {char: 'ぴゅ', reading: 'pyu'}, {char: 'ぴょ', reading: 'pyo'}
 
-    createFlashcards(isKatakana ? 'ア' : 'あ', isKatakana ? 'ン' : 'ん');
+    createFlashcards(isKatakana ? 'ア' : 'あ', isKatakana ? 'ポ' : 'ぽ');
 
