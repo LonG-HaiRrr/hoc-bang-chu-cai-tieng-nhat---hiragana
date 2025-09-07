@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcard Viết</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link rel="icon" href="ditmeno\logo.png" type="image/png">
+  </head>
+  <body>
+
+    <div class="settings">
+      <a href="../index.html">
+        <i class="fa-solid fa-arrow-left" style="color:#d4b5ee; font-size:26px; padding:5px"></i>
+      </a>
+          <select id="skill cho ng dùng">
+            <option value="10">tip dùng nhanh hơn</option>
+            <option value="15">cỡ chữ viết mặc định 10</option>
+            <option value="20">màu chữ viết mặc định trắng</option>
+            <option value="30">ấn esc để thay nút xoá </option>
+            <option value="50">hoặc ấn delete cũng để xoá </option>
+          </select>
+          <select id="strokeWidth">
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+          </select>
+          <button id="colorPickerBtn" style="display: none;"></button>
+          <input type="color" id="colorPicker">
+      <!-- Toggle Hira/Kata -->
+      <label class="switch">
+        <input type="checkbox" id="modeToggle">
+        <span class="slider"></span>
+      </label>
+      <span id="modeLabel">giao diện tối/sáng</span>
+      <button id="clear-btn"class="btn_zone_benphai"> Xoá </button>
+    </div>
+
+    <div class="zoneve">
+      <canvas id="signature-pad" width="300" height="200"></canvas>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

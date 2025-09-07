@@ -1,0 +1,257 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background-color: #32067c  ;
+  touch-action: none;
+}
+
+canvas {
+  margin: 10px 30px 0 30px;
+  background-color: #1d1c1c;
+  border-radius: 10px;
+  border: 3px solid #0941dd;
+}
+/* Toggle switch cơ bản, không ảnh hưởng css khác */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Thanh trượt */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: 0.2s;
+  border-radius: 28px;
+}
+
+/* Núm trượt */
+/* Núm trượt */
+.slider:before {
+  position: absolute;
+  content: "\48";             /* ví dụ icon user */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;              /* với FA6 cần 900 cho solid */
+  display: flex;                 /* để căn giữa nội dung */
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  top: 3px;
+  background-color: #a81f1f;
+  color: #fff;                   /* màu icon */
+  transition: 0.2s;
+  border-radius: 50%;
+  font-size: 12px;               /* size icon */
+}
+
+/* Khi bật, đổi icon nếu muốn */
+.switch input:checked + .slider:before {
+  transform: translateX(22px);
+  content: "\4b";              /* icon check */
+  background-color: #f004c8;
+}
+
+/* Mẹo tìm mã Unicode: mở trang icon của FA hoặc dùng devtools để xem content. 
+Ví dụ: fa-user = \f007, fa-check = \f00c. */
+/* Trạng thái bật */
+.switch input:checked + .slider {
+  background-color: #c98cfa;
+}
+
+
+
+button {
+  margin: 5px 6px 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #0bc9c9;
+  border: none;
+  border-radius: 5px;
+  font-weight: bolder
+}
+#show {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.signature-img {
+  width: 100px;
+  height: 100px;
+}
+.error {
+  color: #f66646;
+  margin: 10px 0;
+}
+
+.benphai {
+  background-color: #ffffff;
+  min-width: 500px;
+  min-height: 500px;
+  margin-top: 30px
+}
+
+.zoneve {
+  /* hiện ngang -  giao diện lap */
+  display: flex; 
+    justify-content: center; /* Căn giữa ngang */
+  align-items: center;     /* Căn giữa dọc */
+}
+.phien_am_sau_bam, .phien_am_truoc_bam {
+  font-size: 40px;
+  display: flex;
+  justify-content: center; /* Căn giữa ngang */
+  align-items: center;     /* Căn giữa dọc */
+}
+.ky_tu {
+  font-size: 130px;  
+  display: flex;
+  color: #4e0158;    
+}
+.settings {
+  margin-bottom: 10px;
+  padding: 10px 100px 10px 300px;
+  background-color: rgb(54, 6, 99);
+  color: rgb(216, 218, 132);
+  font-size: 19px;
+  font-weight: bolder;
+
+}
+.chu_nhap_vao {
+    font-size: 16px;
+  max-width: 100px;
+  height: 30px;
+    text-align: center;   /* chỉ căn giữa ngang chữ nhập */
+    line-height: 30px;    /* căn giữa dọc chữ nhập (hiệu quả với input một dòng) *
+}
+#clear-btn {
+  margin-left: 20px;
+  background-color: #f66646;
+  color: #000000;
+  font-weight: bolder;
+}
+#strokeWidth {
+    width:80px;
+}
+#modeLabel {
+  margin-left: 6px;
+  font-weight: bold;
+  color: #ffd24d;
+}
+#colorPicker {
+  margin: 5px 6px 5px 0px;
+}
+.chuan_viettay {
+  transform-origin: top center; /* giữ điểm neo khi thu phóng */ 
+}
+
+@media (max-width: 990px) {
+  body {
+  background-color: #decdfc  ;
+  touch-action: none;
+}
+  canvas {
+  margin: 10px 30px 0 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 3px solid #1ad079;
+}
+  .zoneve {
+    display: block;
+  }
+  .benphai {
+    margin: 0 20px 0 20px;
+    min-width: 300px !important;
+    min-height: 300px !important;
+    font-size: small;
+  }
+  
+  .chu_nhap_vao {
+  max-width: 52px;
+  font-size: 16px;
+  height: 20px;
+  }
+  .settings {
+    padding: 0 0 0 10px;
+    font-size: 9px;
+    background-color: #45037c;
+    margin: 0;
+  }
+
+  .phien_am_sau_bam {
+      color: #9b0c0c;
+      font-weight: bolder;
+      text-align: center;
+      font-size: 15px !important;
+    }
+  .phien_am_truoc_bam{
+      color: #9b0c0c;
+      font-weight: bolder;
+      text-align: center;
+      font-size: 25px !important;
+  }
+  .ky_tu {
+    font-size: 30px !important;
+    display: block !important;
+    
+  }
+  .chuan_viettay {
+    transform: scale(0.48) translateY(-0px);
+    transform-origin: top center; /* giữ điểm neo khi scale */ 
+    margin-left: 0px;
+  }
+
+  #countdown {
+    font-size: 8px;
+  }
+  .textt, .chu_chuan{
+    color: #06ad51;
+    font-size: 8px;
+  }
+  #clear-btn {
+    margin: 5px 6px;
+  }
+  button {
+  margin: 5px 6px 5px 0px;
+  padding: 3px 10px;
+  cursor: pointer;
+  background-color: #0bc9c9;
+  border: none;
+  border-radius: 5px;
+  }
+  #strokeWidth {
+      width:50px;
+  }
+  #modeLabel {
+    display: none;
+  }
+  .switch {
+    transform: scale(0.6) translateY(-0px);
+    transform-origin: top left; /* giữ điểm neo khi scale */ 
+    margin-top: 6px;
+  }
+    #startBtn {
+    margin-left: 5px !important;
+  }
+}
+
+  
+
