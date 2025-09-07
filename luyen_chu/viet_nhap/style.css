@@ -164,4 +164,49 @@ button {
 }
  
 
+@media (max-width: 860px) {
+  .settings {
+    padding: 0 0 0 10px;
+    font-size: 9px;
+    background-color: #680397;
+    margin: 0;
+  }
+.switch {
+    transform: scale(0.6) translateY(-0px);
+    transform-origin: top left; /* giữ điểm neo khi scale */ 
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 560px) {
+  .settings {
+    padding: 0 0 0 10px;
+    font-size: 9px;
+    background-color: #680397;
+    margin: 0;
+  }
+  #clear-btn {
+    margin: 5px 6px;
+  }
+  button {
+  margin: 5px 6px 5px 0px;
+  padding: 3px 10px;
+  cursor: pointer;
+  background-color: #07e25b;
+  border: none;
+  border-radius: 5px;
+  }
+  #strokeWidth {
+      width:50px;
+  }
+  #modeLabel {
+    display: none;
+  }
+  .switch {
+    transform: scale(0.6) translateY(-0px);
+    transform-origin: top left; /* giữ điểm neo khi scale */ 
+    margin-top: 6px;
+  }
+
+}
 
