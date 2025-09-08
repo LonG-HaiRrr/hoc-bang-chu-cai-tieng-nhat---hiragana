@@ -127,7 +127,6 @@ window.addEventListener('load', resizeCanvas);
 
     // Danh sách Hiragana
   const hiraganaList = [
-    // Cơ bản (seion)
     {char: 'あ', reading: 'a'}, {char: 'い', reading: 'i'}, {char: 'う', reading: 'u'}, {char: 'え', reading: 'e'}, {char: 'お', reading: 'o'},
     {char: 'か', reading: 'ka'}, {char: 'き', reading: 'ki'}, {char: 'く', reading: 'ku'}, {char: 'け', reading: 'ke'}, {char: 'こ', reading: 'ko'},
     {char: 'さ', reading: 'sa'}, {char: 'し', reading: 'shi'}, {char: 'す', reading: 'su'}, {char: 'せ', reading: 'se'}, {char: 'そ', reading: 'so'},
@@ -138,6 +137,26 @@ window.addEventListener('load', resizeCanvas);
     {char: 'や', reading: 'ya'}, {char: 'ゆ', reading: 'yu'}, {char: 'よ', reading: 'yo'},
     {char: 'ら', reading: 'ra'}, {char: 'り', reading: 'ri'}, {char: 'る', reading: 'ru'}, {char: 'れ', reading: 're'}, {char: 'ろ', reading: 'ro'},
     {char: 'わ', reading: 'wa'}, {char: 'を', reading: 'wo'}, {char: 'ん', reading: 'n'},
+    // Dakuon
+    {char: 'が', reading: 'ga'}, {char: 'ぎ', reading: 'gi'}, {char: 'ぐ', reading: 'gu'}, {char: 'げ', reading: 'ge'}, {char: 'ご', reading: 'go'},
+    {char: 'ざ', reading: 'za'}, {char: 'じ', reading: 'ji'}, {char: 'ず', reading: 'zu'}, {char: 'ぜ', reading: 'ze'}, {char: 'ぞ', reading: 'zo'},
+    {char: 'だ', reading: 'da'}, {char: 'ぢ', reading: 'ji'}, {char: 'づ', reading: 'zu'}, {char: 'で', reading: 'de'}, {char: 'ど', reading: 'do'},
+    {char: 'ば', reading: 'ba'}, {char: 'び', reading: 'bi'}, {char: 'ぶ', reading: 'bu'}, {char: 'べ', reading: 'be'}, {char: 'ぼ', reading: 'bo'},
+    // Handakuon
+    {char: 'ぱ', reading: 'pa'}, {char: 'ぴ', reading: 'pi'}, {char: 'ぷ', reading: 'pu'}, {char: 'ぺ', reading: 'pe'}, {char: 'ぽ', reading: 'po'},
+
+    // Yōon (âm ghép)
+    {char: 'きゃ', reading: 'kya'}, {char: 'きゅ', reading: 'kyu'}, {char: 'きょ', reading: 'kyo'},
+    {char: 'しゃ', reading: 'sha'}, {char: 'しゅ', reading: 'shu'}, {char: 'しょ', reading: 'sho'},
+    {char: 'ちゃ', reading: 'cha'}, {char: 'ちゅ', reading: 'chu'}, {char: 'ちょ', reading: 'cho'},
+    {char: 'にゃ', reading: 'nya'}, {char: 'にゅ', reading: 'nyu'}, {char: 'にょ', reading: 'nyo'},
+    {char: 'ひゃ', reading: 'hya'}, {char: 'ひゅ', reading: 'hyu'}, {char: 'ひょ', reading: 'hyo'},
+    {char: 'みゃ', reading: 'mya'}, {char: 'みゅ', reading: 'myu'}, {char: 'みょ', reading: 'myo'},
+    {char: 'りゃ', reading: 'rya'}, {char: 'りゅ', reading: 'ryu'}, {char: 'りょ', reading: 'ryo'},
+    {char: 'ぎゃ', reading: 'gya'}, {char: 'ぎゅ', reading: 'gyu'}, {char: 'ぎょ', reading: 'gyo'},
+    {char: 'じゃ', reading: 'ja'},  {char: 'じゅ', reading: 'ju'},  {char: 'じょ', reading: 'jo'},
+    {char: 'びゃ', reading: 'bya'}, {char: 'びゅ', reading: 'byu'}, {char: 'びょ', reading: 'byo'},
+    {char: 'ぴゃ', reading: 'pya'}, {char: 'ぴゅ', reading: 'pyu'}, {char: 'ぴょ', reading: 'pyo'}
   ];
 // Danh sách Katakana
 const katakanaList = [
@@ -150,7 +169,26 @@ const katakanaList = [
     {char: 'マ', reading: 'ma'}, {char: 'ミ', reading: 'mi'}, {char: 'ム', reading: 'mu'}, {char: 'メ', reading: 'me'}, {char: 'モ', reading: 'mo'},
     {char: 'ヤ', reading: 'ya'}, {char: 'ユ', reading: 'yu'}, {char: 'ヨ', reading: 'yo'},
     {char: 'ラ', reading: 'ra'}, {char: 'リ', reading: 'ri'}, {char: 'ル', reading: 'ru'}, {char: 'レ', reading: 're'}, {char: 'ロ', reading: 'ro'},
-    {char: 'ワ', reading: 'wa'}, {char: 'ヲ', reading: 'wo'}, {char: 'ン', reading: 'n'}
+    {char: 'ワ', reading: 'wa'}, {char: 'ヲ', reading: 'wo'}, {char: 'ン', reading: 'n'},
+    // Dakuon
+    {char: 'ガ', reading: 'ga'}, {char: 'ギ', reading: 'gi'}, {char: 'グ', reading: 'gu'}, {char: 'ゲ', reading: 'ge'}, {char: 'ゴ', reading: 'go'},
+    {char: 'ザ', reading: 'za'}, {char: 'ジ', reading: 'ji'}, {char: 'ズ', reading: 'zu'}, {char: 'ゼ', reading: 'ze'}, {char: 'ゾ', reading: 'zo'},
+    {char: 'ダ', reading: 'da'}, {char: 'ヂ', reading: 'ji'}, {char: 'ヅ', reading: 'zu'}, {char: 'デ', reading: 'de'}, {char: 'ド', reading: 'do'},
+    {char: 'バ', reading: 'ba'}, {char: 'ビ', reading: 'bi'}, {char: 'ブ', reading: 'bu'}, {char: 'ベ', reading: 'be'}, {char: 'ボ', reading: 'bo'},
+    // Handakuon
+    {char: 'パ', reading: 'pa'}, {char: 'ピ', reading: 'pi'}, {char: 'プ', reading: 'pu'}, {char: 'ペ', reading: 'pe'}, {char: 'ポ', reading: 'po'},
+    // Yōon
+    {char: 'キャ', reading: 'kya'}, {char: 'キュ', reading: 'kyu'}, {char: 'キョ', reading: 'kyo'},
+    {char: 'シャ', reading: 'sha'}, {char: 'シュ', reading: 'shu'}, {char: 'ショ', reading: 'sho'},
+    {char: 'チャ', reading: 'cha'}, {char: 'チュ', reading: 'chu'}, {char: 'チョ', reading: 'cho'},
+    {char: 'ニャ', reading: 'nya'}, {char: 'ニュ', reading: 'nyu'}, {char: 'ニョ', reading: 'nyo'},
+    {char: 'ヒャ', reading: 'hya'}, {char: 'ヒュ', reading: 'hyu'}, {char: 'ヒョ', reading: 'hyo'},
+    {char: 'ミャ', reading: 'mya'}, {char: 'ミュ', reading: 'myu'}, {char: 'ミョ', reading: 'myo'},
+    {char: 'リャ', reading: 'rya'}, {char: 'リュ', reading: 'ryu'}, {char: 'リョ', reading: 'ryo'},
+    {char: 'ギャ', reading: 'gya'}, {char: 'ギュ', reading: 'gyu'}, {char: 'ギョ', reading: 'gyo'},
+    {char: 'ジャ', reading: 'ja'}, {char: 'ジュ', reading: 'ju'}, {char: 'ジョ', reading: 'jo'},
+    {char: 'ビャ', reading: 'bya'}, {char: 'ビュ', reading: 'byu'}, {char: 'ビョ', reading: 'byo'},
+    {char: 'ピャ', reading: 'pya'}, {char: 'ピュ', reading: 'pyu'}, {char: 'ピョ', reading: 'pyo'}
 ];
 // Chế độ hiện tại: 'hira' | 'kata'
 let mode = 'hira'; // mặc định Hiragana
