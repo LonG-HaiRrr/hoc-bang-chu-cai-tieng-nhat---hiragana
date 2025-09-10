@@ -200,9 +200,9 @@
 .close-btn {
   position: fixed;
   top: 15px;
-  right: 45px;
+  right: 55px;
   color: rgb(253, 97, 97);
-  font-size: 55px;
+  font-size: 100px;
   font-weight: bold;
   cursor: pointer;
   z-index: 10000;
@@ -211,9 +211,9 @@
 .next_btn {
   position: fixed;
   top: 15px;
-  right: 155px;
+  right: 195px;
   color: rgb(253, 97, 97);
-  font-size: 50px;
+  font-size: 100px;
   font-weight: bold;
   cursor: pointer;
   z-index: 10000;
