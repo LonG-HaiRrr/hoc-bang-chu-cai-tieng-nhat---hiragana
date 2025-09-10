@@ -140,7 +140,7 @@ window.addEventListener('keydown', function(event) {
     function resizeCanvas() {
         if (window.innerWidth > 1008) {
             canvas.width = 1800;
-            canvas.height = 800;
+            canvas.height = 850;
         } else {
             canvas.width = 1800;
             canvas.height = 800;

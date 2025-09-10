@@ -332,3 +332,17 @@ window.addEventListener('resize', () => {
 
     createFlashcards(isKatakana ? 'ア' : 'あ', isKatakana ? 'ポ' : 'ぽ');
 
+document.getElementById('openFullscreenImg').addEventListener('click', function() {
+  document.getElementById('imageFullscreenOverlay').style.display = 'flex';
+});
+
+document.getElementById('closeFullscreen').addEventListener('click', function() {
+  document.getElementById('imageFullscreenOverlay').style.display = 'none';
+});
+
+// Ẩn popup khi click ra ngoài ảnh (optional)
+document.getElementById('imageFullscreenOverlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    this.style.display = 'none';
+  }
+});
