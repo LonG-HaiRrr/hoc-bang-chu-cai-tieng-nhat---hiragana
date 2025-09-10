@@ -368,7 +368,7 @@ nextBtn.addEventListener('click', () => {
     num++;
     
     // Nếu muốn giới hạn số ảnh tối đa (ví dụ max 33), có thể reset lại 1
-    if (num > 33) num = 1; 
+    if (num > 6) num = 1; 
     
     // Tạo src mới
     // Lấy đường dẫn trước số ảnh
