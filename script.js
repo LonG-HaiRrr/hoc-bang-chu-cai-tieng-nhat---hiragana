@@ -346,3 +346,35 @@ document.getElementById('imageFullscreenOverlay').addEventListener('click', func
     this.style.display = 'none';
   }
 });
+
+
+const nextBtn = document.getElementById('nextimg');
+const fullscreenImage = document.getElementById('fullscreenImage');
+
+nextBtn.addEventListener('click', () => {
+  // Lấy src hiện tại, giả sử dạng "chu_viet_tay/1.jpg"
+  let src = fullscreenImage.src;
+  
+  // Lấy phần tên ảnh và phần mở rộng
+  // Ta có thể dùng regex đơn giản để tìm số trong tên file
+  const regex = /(\d+)(\.\w+)$/;
+  const match = src.match(regex);
+  
+  if (match) {
+    let num = parseInt(match[1]);
+    let ext = match[2];
+    
+    // Tăng số ảnh lên 1
+    num++;
+    
+    // Nếu muốn giới hạn số ảnh tối đa (ví dụ max 33), có thể reset lại 1
+    if (num > 33) num = 1; 
+    
+    // Tạo src mới
+    // Lấy đường dẫn trước số ảnh
+    let newSrc = src.replace(regex, `${num}${ext}`);
+    
+    fullscreenImage.src = newSrc;
+  }
+});
+
