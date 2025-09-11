@@ -23,12 +23,24 @@ if (canvas && clearBtn) {
         }
     }
 
-    function startPosition(e) {
-        painting = true;
-        const pos = getPosition(e);
-        context.beginPath();
-        context.moveTo(pos.x, pos.y);
-    }
+function startPosition(e) {
+  painting = true;
+  const pos = getPosition(e);
+  context.beginPath();
+  context.moveTo(pos.x, pos.y);
+  
+  // Vẽ điểm ngay lập tức (dấu chấm)
+  context.lineWidth = currentStrokeWidth;
+  context.lineCap = "round";
+  context.lineJoin = "round";
+  context.strokeStyle = currentStrokeColor;
+
+  context.lineTo(pos.x + 0.1, pos.y + 0.1); // nét rất ngắn tạo dấu chấm
+  context.stroke();
+  context.beginPath();
+  context.moveTo(pos.x, pos.y);
+}
+
 
     function finishedPosition() {
         painting = false;
@@ -151,3 +163,4 @@ window.addEventListener('keydown', function(event) {
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('load', resizeCanvas);
 }
+
