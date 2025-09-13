@@ -30,6 +30,9 @@ canvas {
   width: 0;
   height: 0;
 }
+#skill_faster {
+  color: #45037c;
+}
 
 /* Thanh trượt */
 .slider {
@@ -180,7 +183,7 @@ button {
   height: 20px;
   }
   .settings {
-    padding: 0 0 0 10px;
+    padding: 0px;
     font-size: 9px;
     background-color: #45037c;
     margin: 0;
@@ -233,14 +236,68 @@ button {
   #modeLabel {
     display: none;
   }
-  .switch {
+  /* .switch {
     transform: scale(0.6) translateY(-0px);
-    transform-origin: top left; /* giữ điểm neo khi scale */ 
+    transform-origin: top left; /* giữ điểm neo khi scale 
     margin-top: 6px;
-  }
+  } */
     #startBtn {
     margin-left: 5px !important;
   }
+
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 27.5px;      /* 50 * 0.55 */
+  height: 15.4px;     /* 28 * 0.55 */
+  vertical-align: middle;
+  margin-left: 4.4px; /* 8 * 0.55 */
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#skill_faster {
+  color: #45037c;
+  max-width: 45px;
+  font-size: 10px;
+}
+
+/* Thanh trượt */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: 0.2s;
+  border-radius: 15.4px;   /* 28 * 0.55 */
+}
+
+/* Núm trượt */
+.slider:before {
+  position: absolute;
+  content: "\48";             
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;           
+  display: flex;              
+  align-items: center;
+  justify-content: center;
+  height: 12.1px;   /* 22 * 0.55 */
+  width: 12.1px;    /* 22 * 0.55 */
+  left: 1.7px;      /* 3 * 0.55 */
+  top: 1.7px;       /* 3 * 0.55 */
+  background-color: #a81f1f;
+  color: #fff;      
+  transition: 0.2s;
+  border-radius: 50%;
+  font-size: 6.6px; /* 12 * 0.55 */
+}
+
 }
 
   

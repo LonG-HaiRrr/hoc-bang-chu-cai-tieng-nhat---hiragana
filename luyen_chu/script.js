@@ -81,12 +81,37 @@ function clearCanvasAndState() {
 clearBtn.addEventListener("click", () => {
   clearCanvasAndState();
 });
+
 window.addEventListener('keydown', function(event) {
-    // Kiểm tra phím Delete (key=Delete hoặc keyCode=46) và ESC (key=Escape hoặc keyCode=27)
-    if (event.key === "Delete" || event.key === "Escape" || event.keyCode === 46 || event.keyCode === 27) {
+    // Xoá: esc, delete, x
+    if (
+        event.key === "Delete" ||
+        event.keyCode === 46 ||
+        event.key === "Escape" ||
+        event.keyCode === 27 ||
+        event.key.toLowerCase() === "x"
+    ) {
         clearCanvasAndState();
     }
+    // Tiếp: n, v
+    if (
+        event.key.toLowerCase() === "n" ||
+        event.key.toLowerCase() === "v"
+    ) {
+        if (typeof nextBtn !== "undefined" && infoBox.style.display !== 'none') {
+            nextBtn.click();
+        }
+    }
+    // Xem đáp án: c
+    if (
+        event.key.toLowerCase() === "c"
+    ) {
+        if (typeof answerBtn !== "undefined" && infoBox.style.display !== 'none') {
+            answerBtn.click();
+        }
+    }
 });
+
 
 
 
