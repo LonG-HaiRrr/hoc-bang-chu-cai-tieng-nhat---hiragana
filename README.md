@@ -1,0 +1,1 @@
+web nhằm phục vụ người mới bắt đầu học tiếng nhật
