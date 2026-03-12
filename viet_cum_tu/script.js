@@ -4,6 +4,10 @@ const strokeWidthSelect = document.getElementById('strokeWidth');
 const colorPickerBtn = document.getElementById('colorPickerBtn');
 const colorPickerInput = document.getElementById('colorPicker');
 
+let undoStack = [];
+let redoStack = [];
+const maxUndoSteps = 20;
+
 if (canvas && clearBtn) {
     const context = canvas.getContext("2d");
     let painting = false;
@@ -99,9 +103,60 @@ colorPickerInput.oninput = function() {
   colorPickerBtn.style.background = this.value;
 }
 
-    function saveState() {
-        localStorage.setItem("canvas", canvas.toDataURL());
+// Sửa hàm saveState cũ thành bản mới có lưu Stack
+function saveState() {
+    const dataURL = canvas.toDataURL();
+    localStorage.setItem("canvas", dataURL);
+
+    // Lưu vào lịch sử để Undo
+    undoStack.push(dataURL);
+    if (undoStack.length > maxUndoSteps) {
+        undoStack.shift(); // Xóa bớt nếu quá giới hạn
     }
+    // QUAN TRỌNG: Xóa sạch redoStack khi có hành động vẽ mới
+    redoStack = [];
+}
+
+// Hàm Hoàn tác (Quay lại)
+function undo() {
+    if (undoStack.length > 1) {
+        // Lấy trạng thái hiện tại ra khỏi undo và bỏ vào redo
+        const currentState = undoStack.pop();
+        redoStack.push(currentState);
+
+        // Lấy trạng thái trước đó để vẽ lên canvas
+        const lastState = undoStack[undoStack.length - 1];
+        renderCanvas(lastState);
+    } else if (undoStack.length === 1) {
+        // Nếu chỉ còn 1 bước, đưa nó vào redo và xóa sạch canvas
+        const lastState = undoStack.pop();
+        redoStack.push(lastState);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        localStorage.removeItem("canvas");
+    }
+}
+
+// Hàm Làm lại (Tiến lên)
+function redo() {
+    if (redoStack.length > 0) {
+        // Lấy trạng thái từ redo và bỏ ngược lại vào undo
+        const nextState = redoStack.pop();
+        undoStack.push(nextState);
+        renderCanvas(nextState);
+    }
+}
+
+// Hàm phụ để vẽ dữ liệu lên Canvas
+function renderCanvas(dataURL) {
+    const img = new Image();
+    img.src = dataURL;
+    img.onload = () => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+        localStorage.setItem("canvas", dataURL);
+    };
+}
+
     function loadState() {
         const savedData = localStorage.getItem("canvas");
         if (savedData) {
@@ -117,7 +172,8 @@ colorPickerInput.oninput = function() {
 // Giữ nguyên hàm xóa canvas đã có
 function clearCanvasAndState() {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    saveState();
+    undoStack = []; // Reset lịch sử
+    saveState(); // Lưu trạng thái trắng làm điểm đầu
 }
 
 // Thêm listener bắt phím Delete và ESC
@@ -125,6 +181,15 @@ window.addEventListener('keydown', function(event) {
     // Kiểm tra phím Delete (key=Delete hoặc keyCode=46) và ESC (key=Escape hoặc keyCode=27)
     if (event.key === "Delete" || event.key === "Escape" || event.keyCode === 46 || event.keyCode === 27) {
         clearCanvasAndState();
+    }
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "z" || event.key.toLowerCase() === "z") {
+        event.preventDefault(); // Ngăn trình duyệt thực hiện hành động mặc định (như hoàn tác text)
+        undo();
+    }
+    // Redo: Ctrl + Y HOẶC Ctrl + Shift + Z
+    if ((event.ctrlKey || event.metaKey) && (event.key.toLowerCase() === "y" || (event.shiftKey && event.key.toLowerCase() === "z"))|| event.key.toLowerCase() === "y") {
+        event.preventDefault();
+        redo();
     }
 });
 
@@ -159,6 +224,8 @@ window.addEventListener('keydown', function(event) {
         }
         context.clearRect(0, 0, canvas.width, canvas.height);
         loadState();
+        undoStack = []; 
+        saveState();
     }
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('load', resizeCanvas);

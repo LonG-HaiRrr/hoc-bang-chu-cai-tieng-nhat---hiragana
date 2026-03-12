@@ -6,8 +6,6 @@ const context = canvas.getContext("2d");
 let display = document.getElementById("show");
 let painting = false;
 let drawStart = false;
-let undoStack = [];
-const maxUndoSteps = 20; // Giới hạn số bước để tránh tốn bộ nhớ
 
 // DOM elements
 const startInput = document.getElementById('startChar');
@@ -38,54 +36,8 @@ function finishedPosition() {
 
 
 function saveState() {
-  // Lưu vào localStorage (giữ nguyên code cũ của ông)
   localStorage.setItem("canvas", canvas.toDataURL());
-
-  // Lưu vào stack để Undo
-  if (undoStack.length >= maxUndoSteps) {
-    undoStack.shift(); // Xoá bước cũ nhất nếu quá giới hạn
-  }
-  undoStack.push(canvas.toDataURL());
 }
-
-// Cập nhật lại hàm này để lưu trạng thái NGAY KHI kết thúc nét vẽ
-function finishedPosition() {
-  if (painting) {
-    painting = false;
-    context.beginPath();
-    saveState(); // Gọi lưu trạng thái ở đây
-  }
-}
-
-function undo() {
-  if (undoStack.length > 1) {
-    undoStack.pop(); // Bỏ trạng thái hiện tại
-    const lastState = undoStack[undoStack.length - 1];
-    
-    const img = new Image();
-    img.src = lastState;
-    img.onload = () => {
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(img, 0, 0);
-      // Cập nhật lại localStorage sau khi undo
-      localStorage.setItem("canvas", canvas.toDataURL());
-    };
-  } else if (undoStack.length === 1) {
-    // Nếu chỉ còn 1 bước (trạng thái ban đầu), thì xoá sạch về nền
-    undoStack.pop();
-    clearCanvasAndState();
-  }
-}
-window.addEventListener('keydown', function(event) {
-    // ... các code cũ của ông (Delete, Escape, N, V, C) ...
-
-    // Thêm tổ hợp phím Ctrl + Z hoặc Cmd + Z (cho Mac)
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "z") {
-        event.preventDefault(); // Ngăn trình duyệt thực hiện hành động mặc định
-        undo();
-    }
-});
-
 
 function loadState() {
   const savedData = localStorage.getItem("canvas");
