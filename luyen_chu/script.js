@@ -6,6 +6,9 @@ const context = canvas.getContext("2d");
 let display = document.getElementById("show");
 let painting = false;
 let drawStart = false;
+let undoStack = [];
+let redoStack = []; // Thêm mảng này để lưu lịch sử làm lại
+const maxUndoSteps = 20;
 
 // DOM elements
 const startInput = document.getElementById('startChar');
@@ -36,7 +39,66 @@ function finishedPosition() {
 
 
 function saveState() {
-  localStorage.setItem("canvas", canvas.toDataURL());
+  const dataURL = canvas.toDataURL();
+  localStorage.setItem("canvas", dataURL);
+
+  if (undoStack.length >= maxUndoSteps) {
+    undoStack.shift(); 
+  }
+  undoStack.push(dataURL);
+  
+  // Rất quan trọng: Xoá lịch sử redo khi có nét vẽ mới
+  redoStack = []; 
+}
+
+// Thêm hàm phụ này để vẽ lại ảnh giúp code gọn hơn
+function renderCanvas(dataURL) {
+  const img = new Image();
+  img.src = dataURL;
+  img.onload = () => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(img, 0, 0);
+    localStorage.setItem("canvas", dataURL);
+  };
+}
+
+// Cập nhật lại hàm này để lưu trạng thái NGAY KHI kết thúc nét vẽ
+function finishedPosition() {
+  if (painting) {
+    painting = false;
+    context.beginPath();
+    saveState(); // Gọi lưu trạng thái ở đây
+  }
+}
+function undo() {
+  if (undoStack.length > 1) {
+    // Rút trạng thái hiện tại ra khỏi undoStack và bỏ vào redoStack
+    const currentState = undoStack.pop(); 
+    redoStack.push(currentState); 
+
+    // Vẽ lại trạng thái trước đó
+    const lastState = undoStack[undoStack.length - 1]; 
+    renderCanvas(lastState);
+  } else if (undoStack.length === 1) {
+    // Nếu về tới nét đầu tiên, lưu lại rồi xoá trắng canvas
+    const currentState = undoStack.pop();
+    redoStack.push(currentState);
+    
+    // Xoá trắng và vẽ lại nền thay vì gọi clearCanvasAndState() để không làm loạn Stack
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    setBackgroundImage();
+    localStorage.setItem("canvas", canvas.toDataURL());
+  }
+}
+
+// Hàm mới: Redo (Làm lại)
+function redo() {
+  if (redoStack.length > 0) {
+    // Lấy trạng thái gần nhất từ redoStack đẩy lại vào undoStack
+    const nextState = redoStack.pop();
+    undoStack.push(nextState);
+    renderCanvas(nextState);
+  }
 }
 
 function loadState() {
@@ -109,6 +171,14 @@ window.addEventListener('keydown', function(event) {
         if (typeof answerBtn !== "undefined" && infoBox.style.display !== 'none') {
             answerBtn.click();
         }
+    }
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "z" || event.key.toLowerCase() === "z") {
+        event.preventDefault(); // Ngăn trình duyệt thực hiện hành động mặc định
+        undo();
+    }
+    if ((event.ctrlKey || event.metaKey) && (event.key.toLowerCase() === "y" )|| event.key.toLowerCase() === "y") {
+        event.preventDefault();
+        redo();
     }
 });
 
