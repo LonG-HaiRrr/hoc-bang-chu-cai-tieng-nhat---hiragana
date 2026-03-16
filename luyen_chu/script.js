@@ -194,7 +194,8 @@ window.onload = (event) => {
 
 function setBackgroundImage() {
     const img = new Image();
-    img.src = "123.png";
+    img.src = "124.png";
+    //      img.src = "123.png";
     img.onload = function() {
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
     }
@@ -387,7 +388,8 @@ answerBtn.addEventListener('click', () => {
 
 
 // Lưu màu và kích thước hiện tại
-let currentStrokeColor = '#000000'; // mặc định ban đầu màu vẽ
+let currentStrokeColor = '#ffffff'; // mặc định ban đầu màu vẽ
+// let currentStrokeColor = '#000000'; // mặc định ban đầu màu vẽ
 let currentStrokeWidth = 20;
 
 strokeWidthSelect.addEventListener('change', function () {
