@@ -128,7 +128,7 @@ button {
 .ky_tu {
   font-size: 130px;  
   display: flex;
-  color: #4e0158;    
+  color: #bc00d4;    
 }
 .settings {
   margin-bottom: 10px;
@@ -191,13 +191,13 @@ button {
   }
 
   .phien_am_sau_bam {
-      color: #9b0c0c;
+      color: #e20202;
       font-weight: bolder;
       text-align: center;
       font-size: 15px !important;
     }
   .phien_am_truoc_bam{
-      color: #9b0c0c;
+      color: #d80606;
       font-weight: bolder;
       text-align: center;
       font-size: 25px !important;
