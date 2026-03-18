@@ -166,6 +166,10 @@ button {
 .chuan_viettay {
   transform-origin: top center; /* giữ điểm neo khi thu phóng */ 
 }
+.img-huong-dan {
+  width: 200px;
+    height: auto;
+}
 
 @media (max-width: 990px) {
   .zoneve {
@@ -174,6 +178,10 @@ button {
   .startlabel{
     display: none !important;
   }
+  .img-huong-dan {
+  width: 140px;
+    height: auto;
+}
   .benphai {
     margin: 0 20px 0 20px;
     min-width: 300px !important;

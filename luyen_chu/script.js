@@ -384,11 +384,11 @@ answerBtn.addEventListener('click', () => {
 
     <div class="huong_dan_anh" style="display: flex; justify-content: center;  align-items: center; gap: 2px;">
         <div style="text-align: center;">
-          <img src="hiragana/${curr.reading}.png" style="width: 200px; height: auto; "/>
+          <img src="hiragana/${curr.reading}.png" class="img-huong-dan" />
         </div>
         
         <div style="text-align: center;">
-          <img src="katakana/${curr.reading}.png" style="width: 200px; height: auto; "/>
+          <img src="katakana/${curr.reading}.png" class="img-huong-dan" />
         </div>
     </div>
   `;
