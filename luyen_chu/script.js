@@ -325,7 +325,7 @@ function showCurrentKana() {
   const glyph = curr.char; // vì activeList lấy từ kanaList theo mode, trường là 'char'
 
   kanaInfo.innerHTML = `
-    <div class="phien_am_truoc_bam" style="margin-left: 120px;">
+    <div class="phien_am_truoc_bam" >
       Phiên âm: ${curr.reading}
     </div>
   `;
@@ -382,14 +382,12 @@ answerBtn.addEventListener('click', () => {
          </div>
      </div> -->
 
-    <div class="huong_dan_anh" style="display: flex; justify-content: center;  align-items: center; gap: 20px;">
+    <div class="huong_dan_anh" style="display: flex; justify-content: center;  align-items: center; gap: 2px;">
         <div style="text-align: center;">
-          <p style="font-size: 17px; margin: 0;">Hiragana</p>
           <img src="hiragana/${curr.reading}.png" style="width: 200px; height: auto; "/>
         </div>
         
         <div style="text-align: center;">
-          <p style="font-size: 17px; margin: 0;">Katakana</p>
           <img src="katakana/${curr.reading}.png" style="width: 200px; height: auto; "/>
         </div>
     </div>
