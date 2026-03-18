@@ -83,7 +83,7 @@ Ví dụ: fa-user = \f007, fa-check = \f00c. */
 
 
 button {
-  margin: 5px 6px 5px;
+  margin: 20px 6px 5px;
   padding: 5px 10px;
   cursor: pointer;
   background-color: #0bc9c9;
@@ -170,10 +170,16 @@ button {
   width: 200px;
     height: auto;
 }
+.Cum_btn_zone_benphai {
+margin-left: 60px;
+}
 
 @media (max-width: 990px) {
   .zoneve {
     display: block;
+  }
+  .Cum_btn_zone_benphai {
+    margin: 0px;
   }
   .startlabel{
     display: none !important;
