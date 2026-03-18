@@ -337,7 +337,6 @@ function showCurrentKana() {
   imgs.forEach(el => el.remove());
 }
 
-
 audioBtn.addEventListener('click', () => {
   const curr = activeList[currentIdx];
   const folder = mode === 'hira' ? 'hiragana' : 'katakana';
@@ -376,11 +375,23 @@ answerBtn.addEventListener('click', () => {
       <div class="ky_tu">${glyph}</div>
     </div>
     
-    <div class="chu_chuan" style="display: flex; justify-content: center; align-items: center;">
-      <div class="textt2">chữ viết tay: </div>
-      <div class="chuan_viettay">
-        <img src="${folder}/${curr.reading}.png"/>
-      </div>
+    <!-- <div class="chu_chuan" style="display: flex; justify-content: center; align-items: center;">
+         <div class="textt2">chữ viết tay: </div>
+         <div class="chuan_viettay">
+         <img src="${folder}/${curr.reading}.png"/>
+         </div>
+     </div> -->
+
+    <div class="huong_dan_anh" style="display: flex; justify-content: center;  align-items: center; gap: 20px;">
+        <div style="text-align: center;">
+          <p style="font-size: 17px; margin: 0;">Hiragana</p>
+          <img src="hiragana/${curr.reading}.png" style="width: 200px; height: auto; "/>
+        </div>
+        
+        <div style="text-align: center;">
+          <p style="font-size: 17px; margin: 0;">Katakana</p>
+          <img src="katakana/${curr.reading}.png" style="width: 200px; height: auto; "/>
+        </div>
     </div>
   `;
 });
