@@ -325,7 +325,7 @@ function showCurrentKana() {
   const glyph = curr.char; // vì activeList lấy từ kanaList theo mode, trường là 'char'
 
   kanaInfo.innerHTML = `
-    <div class="phien_am_truoc_bam">
+    <div class="phien_am_truoc_bam" style="margin-left: 120px;">
       Phiên âm: ${curr.reading}
     </div>
   `;

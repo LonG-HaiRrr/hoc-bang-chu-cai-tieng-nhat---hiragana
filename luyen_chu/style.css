@@ -171,6 +171,9 @@ button {
   .zoneve {
     display: block;
   }
+  .startlabel{
+    display: none !important;
+  }
   .benphai {
     margin: 0 20px 0 20px;
     min-width: 300px !important;
@@ -199,8 +202,8 @@ button {
   .phien_am_truoc_bam{
       color: #d80606;
       font-weight: bolder;
-      text-align: center;
       font-size: 25px !important;
+
   }
   .ky_tu {
     font-size: 30px !important;
