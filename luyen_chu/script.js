@@ -382,15 +382,43 @@ audioBtn.addEventListener('click', () => {
 });
 
 
+// Thêm biến để kiểm tra trạng thái khóa nút
+let isNextDisabled = false;
+
 nextBtn.addEventListener('click', () => {
-  if (currentIdx + 1 < activeList.length) {
-    currentIdx++;
-    showCurrentKana();
-    clearCanvasAndState();
-  } else {
-    alert('Đã hoàn thành tất cả các chữ cái!');
-    infoBox.style.display = 'none';
-  }
+    // 1. Kiểm tra khóa ngay đầu hàm - Luôn luôn check
+    if (isNextDisabled) return;
+
+    // 2. KHÓA NÚT LUÔN (Bất kể danh sách còn hay hết)
+    isNextDisabled = true;
+    nextBtn.classList.add('disabled-btn'); 
+    const originalText = nextBtn.textContent;
+    let secondsLeft = 2;
+    nextBtn.textContent = `Chờ (${secondsLeft}s)`;
+
+    // 3. Thực hiện đếm ngược để mở khóa (Chạy độc lập)
+    const timer = setInterval(() => {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+            nextBtn.textContent = `Next (${secondsLeft}s)`;
+        } else {
+            clearInterval(timer);
+            isNextDisabled = false;
+            nextBtn.textContent = originalText;
+            nextBtn.classList.remove('disabled-btn');
+        }
+    }, 1000);
+
+    // 4. Giờ mới xử lý logic chuyển chữ hoặc thông báo hết chữ
+    if (currentIdx + 1 < activeList.length) {
+        currentIdx++;
+        showCurrentKana();
+        clearCanvasAndState();
+    } else {
+        alert('Đã hoàn thành tất cả các chữ cái!');
+        infoBox.style.display = 'none';
+        // Khi hết chữ, nút bị ẩn theo infoBox nên cũng chẳng ai bấm được nữa
+    }
 });
 
 // SỰ KIỆN CHO NÚT UNDO TRÊN ĐIỆN THOẠI

@@ -34,6 +34,12 @@ canvas {
 #skill_faster {
   color: #45037c;
 }
+/* Style khi nút bị vô hiệu hóa */
+.disabled-btn {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none; /* Ngăn chặn cả hover và click ở mức trình duyệt */
+}
 
 /* Thanh trượt */
 .slider {
