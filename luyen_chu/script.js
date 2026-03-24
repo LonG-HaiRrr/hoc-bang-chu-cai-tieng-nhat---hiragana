@@ -400,7 +400,7 @@ nextBtn.addEventListener('click', () => {
     const timer = setInterval(() => {
         secondsLeft--;
         if (secondsLeft > 0) {
-            nextBtn.textContent = `Next (${secondsLeft}s)`;
+            nextBtn.textContent = `Chờ (${secondsLeft}s)`;
         } else {
             clearInterval(timer);
             isNextDisabled = false;
