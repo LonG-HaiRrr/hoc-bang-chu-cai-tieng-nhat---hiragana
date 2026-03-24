@@ -197,6 +197,15 @@ window.onload = (event) => {
   drawStart = false;
   context.clearRect(0, 0, canvas.width, canvas.height);
   saveState();
+  
+  // KIỂM TRA MÀN HÌNH ĐỂ ẨN/HIỆN NÚT UNDO KHI VỪA VÀO TRANG
+  if (ctrl_z) {
+      if (window.innerWidth > 900) {
+          ctrl_z.style.display = 'none'; // Ẩn trên Laptop
+      } else {
+          ctrl_z.style.display = 'inline-block'; // Hiện trên Mobile
+      }
+  }
 };
 
 function setBackgroundImage() {
@@ -218,7 +227,25 @@ function resizeCanvas() {
     setBackgroundImage();
 }
 
-window.addEventListener('resize', resizeCanvas);
+// Thêm một sự kiện lắng nghe khi xoay màn hình hoặc resize trình duyệt
+window.addEventListener('resize', () => {
+    // Chỉ tự động đổi nếu bạn muốn nó luôn bám sát theo độ rộng màn hình
+    // Nếu không muốn làm phiền người dùng sau khi họ đã tự chọn tay, có thể bỏ qua bước này
+    currentStrokeWidth = (window.innerWidth <= 900) ? 5 : 10;
+    
+    if (strokeWidthSelect) {
+        strokeWidthSelect.value = currentStrokeWidth;
+    }
+
+    // KIỂM TRA MÀN HÌNH ĐỂ ẨN/HIỆN NÚT UNDO KHI KÉO GIÃN TRÌNH DUYỆT
+    if (ctrl_z) {
+        if (window.innerWidth > 900) {
+            ctrl_z.style.display = 'none'; // Ẩn trên Laptop
+        } else {
+            ctrl_z.style.display = 'inline-block'; // Hiện trên Mobile
+        }
+    }
+});
 window.addEventListener('load', resizeCanvas);
 
 
