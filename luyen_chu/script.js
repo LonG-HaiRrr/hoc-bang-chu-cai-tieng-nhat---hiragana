@@ -399,7 +399,24 @@ answerBtn.addEventListener('click', () => {
 // Lưu màu và kích thước hiện tại
 let currentStrokeColor = '#ffffff'; // mặc định ban đầu màu vẽ
 // let currentStrokeColor = '#000000'; // mặc định ban đầu màu vẽ
-let currentStrokeWidth = 20;
+// Thay thế đoạn khai báo cũ bằng đoạn này
+let currentStrokeWidth = (window.innerWidth <= 900) ? 5 : 20;
+
+// Cập nhật giá trị hiển thị trên thẻ Select (nếu có) để người dùng không bị nhầm
+if (strokeWidthSelect) {
+    strokeWidthSelect.value = currentStrokeWidth;
+}
+
+// Thêm một sự kiện lắng nghe khi xoay màn hình hoặc resize trình duyệt
+window.addEventListener('resize', () => {
+    // Chỉ tự động đổi nếu bạn muốn nó luôn bám sát theo độ rộng màn hình
+    // Nếu không muốn làm phiền người dùng sau khi họ đã tự chọn tay, có thể bỏ qua bước này
+    currentStrokeWidth = (window.innerWidth <= 900) ? 5 : 20;
+    
+    if (strokeWidthSelect) {
+        strokeWidthSelect.value = currentStrokeWidth;
+    }
+});
 
 strokeWidthSelect.addEventListener('change', function () {
   currentStrokeWidth = parseInt(this.value);
