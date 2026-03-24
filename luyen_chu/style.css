@@ -241,10 +241,10 @@ margin-left: 60px;
     margin: 5px 6px;
   }
   button {
-  margin: 5px 6px 5px 0px !important;
+  margin: 5px 3px 5px 3px !important;
   padding: 3px 10px;
   cursor: pointer;
-  background-color: #0bc9c9;
+  background-color: #062727;
   color: #202020 !important;
   border: none;
   border-radius: 5px;
